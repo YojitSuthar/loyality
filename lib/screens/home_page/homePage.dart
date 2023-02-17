@@ -1,3 +1,5 @@
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,11 +16,20 @@ class home_page extends StatefulWidget {
 class _home_pageState extends State<home_page> {
   int index = 0;
 
+  final db = FirebaseFirestore.instance;
   final user = FirebaseAuth.instance.currentUser!;
+
+
   final pages = [
     const Page1(),
     const Page2(),
   ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    checkuser();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,64 +39,65 @@ class _home_pageState extends State<home_page> {
       ),
       drawer: Drawer(
           child: ListView(
-        children: [
-          DrawerHeader(
-            decoration: BoxDecoration(color: Colors.teal),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 25),
-                  child: CircleAvatar(
-                    backgroundColor: Colors.white,
-                    radius: 40,
-                    child: Icon(
-                      Icons.account_circle_sharp,
-                      size: 80,
-                      color: Colors.teal,
+            children: [
+              DrawerHeader(
+                decoration: BoxDecoration(color: Colors.teal),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 25),
+                      child: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        radius: 40,
+                        child: Icon(
+                          Icons.account_circle_sharp,
+                          size: 80,
+                          color: Colors.teal,
+                        ),
+                      ),
                     ),
-                  ),
+                    Container(
+                      margin: EdgeInsets.only(bottom: 10),
+                      child: Text(
+                        user.email!,
+                        style: TextStyle(fontSize: 19, color: Colors.white),
+                      ),
+                    )
+                  ],
                 ),
-                Container(
-                  margin: EdgeInsets.only(bottom: 10),
-                  child: Text(
-                    user.email!,
-                    style: TextStyle(fontSize: 19, color: Colors.white),
-                  ),
-                )
-              ],
-            ),
-          ),
-          ListTile(
-            leading: Icon(Icons.paypal),
-            title: Text("PayPal"),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: Icon(Icons.home_work_outlined),
-            title: Text("Addr"),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: Icon(Icons.key),
-            title: Text("Password"),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: Icon(Icons.logout),
-            title: Text("Logout"),
-            onTap: () {
-              FirebaseAuth.instance.signOut().then((value) =>
-                  Navigator.of(context).pushReplacement(new MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return new login_page();
-                    },
-                  )));
-            },
-          ),
-        ],
-      )),
+              ),
+              ListTile(
+                leading: Icon(Icons.paypal),
+                title: Text("PayPal"),
+                onTap: () {},
+              ),
+              ListTile(
+                leading: Icon(Icons.home_work_outlined),
+                title: Text("Addr"),
+                onTap: () {},
+              ),
+              ListTile(
+                leading: Icon(Icons.key),
+                title: Text("Password"),
+                onTap: () {},
+              ),
+              ListTile(
+                leading: Icon(Icons.logout),
+                title: Text("Logout"),
+                onTap: () {
+                  FirebaseAuth.instance.signOut().then((value) =>
+                      Navigator.of(context).pushReplacement(
+                          new MaterialPageRoute(
+                            builder: (BuildContext context) {
+                              return new login_page();
+                            },
+                          )));
+                },
+              ),
+            ],
+          )),
       body: pages[index],
       bottomNavigationBar: bottumBar(),
     );
@@ -96,8 +108,9 @@ class _home_pageState extends State<home_page> {
       height: 62.h,
       decoration: BoxDecoration(
           color: GradientColorManager.g2_color,
-          borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15), topRight: Radius.circular(15))
+          borderRadius: BorderRadius
+              .only(
+              topLeft: Radius.circular(15), topRight: Radius.circular(15))
               .w),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -209,6 +222,23 @@ class _home_pageState extends State<home_page> {
       ),
     );
   }
+
+  checkuser() {
+
+    final capitalcities = db.collection("Users");
+    final data1 = <String, dynamic>{
+      "name": "San Francisco",
+      "state": "CA",
+      "country": "USA",
+      "capital": false,
+      "population": 860000,
+      "regions": ["west_coast", "norcal"]
+    };
+    capitalcities.doc()
+   // print(capitalcities);
+    //print(capitalcities.withConverter(fromFirestore: fromFirestore, toFirestore: toFirestore));
+  }
+
 }
 
 class Page1 extends StatelessWidget {

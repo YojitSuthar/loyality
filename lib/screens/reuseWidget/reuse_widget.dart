@@ -87,17 +87,17 @@ class buttons extends StatelessWidget {
             );
             Fire_base().signup(Econtroller!, Pcontroller!);
           } else if (label == "Sign-In") {
-            debugPrint("Sign-In");
+           // debugPrint("Sign-In");
             Fire_base().singIn(Econtroller!, Pcontroller!);
-            ScaffoldMessenger.of(context).showSnackBar(
+            /*ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Successfully signed in')),
-            );
-          } else if (label == "Reset-password") {
+            );*/
+          } /*else if (label == "Reset-password") {
             Fire_base().forget_password(Econtroller!);
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Password reset')),
             );
-          } else {
+          }*/ else {
             if (formKey.currentState!.validate()) {
               Navigator.pushNamed(context, "$navigation");
             }

@@ -49,12 +49,12 @@ class _login_pageState extends State<login_page> {
             SizedBox(
               height: 5.h,
             ),
-            GestureDetector(
+          /*  GestureDetector(
               onTap: (){
                 Navigator.pushNamed(context,  "forgetPass");
               },
               child: Text("Forgot password ?",style: getTextStyle(15.sp, "Madurai", ColorManager.teal),),
-            )
+            )*/
           ],
         ),
       ),
