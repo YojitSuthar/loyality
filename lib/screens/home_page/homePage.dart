@@ -64,7 +64,7 @@ class _home_pageState extends State<home_page> {
           ),
           ListTile(
             leading: Icon(Icons.home_work_outlined),
-            title: Text("Address"),
+            title: Text("Addr"),
             onTap: () {},
           ),
           ListTile(
