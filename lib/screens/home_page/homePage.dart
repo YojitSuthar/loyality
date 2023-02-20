@@ -121,6 +121,7 @@ class _home_pageState extends State<home_page> {
                 IconButton(
                     enableFeedback: false,
                     onPressed: () {
+                      checkuser();
                       setState(() {
                         index = 0;
                       });
@@ -225,18 +226,10 @@ class _home_pageState extends State<home_page> {
 
   checkuser() {
 
-    final capitalcities = db.collection("Users");
-    final data1 = <String, dynamic>{
-      "name": "San Francisco",
-      "state": "CA",
-      "country": "USA",
-      "capital": false,
-      "population": 860000,
-      "regions": ["west_coast", "norcal"]
-    };
-    capitalcities.doc()
-   // print(capitalcities);
-    //print(capitalcities.withConverter(fromFirestore: fromFirestore, toFirestore: toFirestore));
+    CollectionReference users = FirebaseFirestore.instance.collection('Users');
+    print(users.doc().);
+    print(users);
+
   }
 
 }
