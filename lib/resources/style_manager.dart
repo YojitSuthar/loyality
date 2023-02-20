@@ -9,12 +9,16 @@ class FontWeightManager {
   static const FontWeight super_bold = FontWeight.w900;
 }
 
+TextStyle new_1TextStyle(double fontSize, FontWeight weight){
+  return TextStyle(fontSize: fontSize, fontWeight: weight);
+
+}
+
 TextStyle newgetTextStyle(double fontSize, FontWeight fontweight, Color color) {
   return TextStyle(fontSize: fontSize, fontWeight: fontweight, color: color);
 }
 
 TextStyle getTextStyle(double fontSize,String fontFamily, Color color) {
   return TextStyle(fontSize: fontSize, fontFamily: fontFamily, color: color);
-
 
 }
