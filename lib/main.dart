@@ -1,6 +1,8 @@
 import 'package:assign_1/screens/Forget_password/forget_password.dart';
 import 'package:assign_1/screens/home_page/homePage.dart';
 import 'package:assign_1/screens/login_page/loginPage.dart';
+import 'package:assign_1/screens/loyality_card/loyallity_card.dart';
+import 'package:assign_1/screens/loyality_card/user_data_textfield.dart';
 import 'package:assign_1/screens/signup_page/signUp_page.dart';
 import 'package:assign_1/screens/splash_screen/splash_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,6 +31,8 @@ class myApp extends StatelessWidget {
             "Signup":(context)=> signup(),
             home_page.id:(context) =>home_page(),
             "forgetPass":(context) =>forget_pass(),
+            "loyal_card":(context) =>loyal_card(),
+            "userDataField":(context)=>userDataField(),
           },
         );
       },

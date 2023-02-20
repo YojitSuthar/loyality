@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:assign_1/resources/resources.dart';
 import '../home_page/homePage.dart';
 import '../login_page/loginPage.dart';
+import '../loyality_card/loyallity_card.dart';
 
 class splash_screen extends StatefulWidget {
   @override
