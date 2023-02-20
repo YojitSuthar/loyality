@@ -7,6 +7,7 @@ import 'package:assign_1/resources/resources.dart';
 import 'package:assign_1/screens/login_page/loginPage.dart';
 import '../loyality_card/loyallity_card.dart';
 import '../reuseWidget/card.dart';
+import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 
 class home_page extends StatefulWidget {
   static String id = "home_page";
@@ -21,11 +22,10 @@ class _home_pageState extends State<home_page> {
   final db = FirebaseFirestore.instance;
   final user = FirebaseAuth.instance.currentUser!;
 
-
   final pages = [
     const Page1(),
-    const Page2(),
-    const loyal_card(),
+   // const Page2(),
+    loyal_card(),
   ];
 
   @override
@@ -122,7 +122,7 @@ class _home_pageState extends State<home_page> {
 
   Container bottumBar() {
     return Container(
-      height: 62.h,
+      height: 65.h,
       decoration: BoxDecoration(
           color: ColorManager.white,
           border: Border.all(color: ColorManager.black),
@@ -218,6 +218,7 @@ class _home_pageState extends State<home_page> {
             ),
           ),
           Container(
+
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -228,7 +229,7 @@ class _home_pageState extends State<home_page> {
                             context: context,
                             builder: (BuildContext context) {
                               return Dialog(
-                                backgroundColor: Colors.white,
+                                backgroundColor: Colors.transparent,
                                 child: Container(
                                   child: Column(
                                     mainAxisAlignment:
@@ -317,14 +318,32 @@ class _home_pageState extends State<home_page> {
     );
   }
 
-  checkuser() {
+  checkuser() async {
 
-    CollectionReference users = FirebaseFirestore.instance.collection('Users');
-    print(users.doc().);
-    print(users);
+    var users =FirebaseFirestore.instance.collection("Users");
 
+    print(users.id);
+
+    // users.doc("Users/${user.email}").forEach((element){
+    //
+    // });
+
+    CollectionReference _collectionRef = FirebaseFirestore.instance.collection('Users');
+
+
+    QuerySnapshot querySnapshot = await _collectionRef.get();
+    final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
+
+    print(allData);
+
+    Object nUser=Object();
+    nUser=
+    allData.forEach((element){
+      print(element=={Email: "zala@gmail.com"});
+
+    });
+    //print(temp);
   }
-
 }
 
 class Page1 extends StatelessWidget {
@@ -333,23 +352,8 @@ class Page1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(
+        child: Center(
         child: Icon(Icons.home),
-      ),
-    );
-  }
-}
-
-class Page2 extends StatelessWidget {
-  const Page2({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        leading: Icon(Icons.cabin),
-        title: Text("kuch bhi"),
-        onTap: () {},
       ),
     );
   }
