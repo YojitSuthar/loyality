@@ -4,11 +4,16 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:assign_1/resources/resources.dart';
 
 class userDataField extends StatelessWidget {
+
   TextEditingController card_controller = TextEditingController();
   TextEditingController vendor_contrller = TextEditingController();
   TextEditingController program_controller = TextEditingController();
   TextEditingController website_controller = TextEditingController();
   TextEditingController notes_controller = TextEditingController();
+
+   String label;
+   String value;
+  userDataField({ required this.label,required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +43,7 @@ class userDataField extends StatelessWidget {
                           width: 10.w,
                         ),
                         Text(
-                          "New Card",
+                          label,
                           style: TextStyle(
                               fontSize: 20.sp, fontWeight: FontWeight.w500),
                         )
@@ -108,7 +113,7 @@ class userDataField extends StatelessWidget {
                           ElevatedButton(style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.green,
                             padding: const EdgeInsets.all(20),
-                          ),onPressed: () {}, child: const Text("Save")))
+                          ),onPressed: () {}, child: Text(value)))
                 ],
               ),
             ),

@@ -142,7 +142,7 @@ class loyal_card extends StatelessWidget {
                                               child: TextButton(
                                                   onPressed: () {
                                                     Navigator.pushNamed(
-                                                        context, "Edit");
+                                                        context, "EdituserDataField");
                                                   },
                                                   child: const Text("Edit ")),
                                             ),

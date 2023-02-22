@@ -32,8 +32,8 @@ class myApp extends StatelessWidget {
             home_page.id:(context) =>home_page(),
             "forgetPass":(context) =>forget_pass(),
             "loyal_card":(context) =>loyal_card(),
-            "userDataField":(context)=>userDataField(),
-            "Edit":(context) =>userDataField(),
+            "userDataField":(context)=>userDataField(label: "New Card",value: "Save"),
+            "EdituserDataField":(context)=>userDataField(label: "Edit Card",value: "Update"),
           },
         );
       },
