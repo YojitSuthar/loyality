@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,20 +6,22 @@ import 'package:assign_1/resources/resources.dart';
 import 'package:assign_1/screens/login_page/loginPage.dart';
 import '../loyality_card/loyallity_card.dart';
 import '../reuseWidget/card.dart';
-import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 
-class home_page extends StatefulWidget {
+
+class HomePage extends StatefulWidget {
   static String id = "home_page";
 
+  const HomePage({super.key});
+
   @override
-  State<home_page> createState() => _home_pageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _home_pageState extends State<home_page> {
+class _HomePageState extends State<HomePage> {
   int index = 0;
 
-  final db = FirebaseFirestore.instance;
-  final user = FirebaseAuth.instance.currentUser!;
+  var dbUser =FirebaseFirestore.instance.collection("Users");
+  final currentUser = FirebaseAuth.instance.currentUser?.email;
 
   final pages = [
     const Page1(),
@@ -30,8 +31,9 @@ class _home_pageState extends State<home_page> {
 
   @override
   void initState() {
+    super.initState();
     // TODO: implement initState
-    checkuser();
+    checkUser();
   }
 
   @override
@@ -40,19 +42,19 @@ class _home_pageState extends State<home_page> {
       appBar: AppBar(
         backgroundColor: Colors.green,
         centerTitle: true,
-        title: Text("Home Page"),
+        title: const Text("Home Page"),
       ),
       drawer: Drawer(
           child: ListView(
             children: [
               DrawerHeader(
-                decoration: BoxDecoration(color: Colors.teal),
+                decoration: const BoxDecoration(color: Colors.teal),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 25),
+                    const Padding(
+                      padding: EdgeInsets.only(bottom: 25),
                       child: CircleAvatar(
                         backgroundColor: Colors.white,
                         radius: 40,
@@ -64,39 +66,39 @@ class _home_pageState extends State<home_page> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(bottom: 10),
+                      margin: const EdgeInsets.only(bottom: 10),
                       child: Text(
-                        user.email!,
-                        style: TextStyle(fontSize: 19, color: Colors.white),
+                        currentUser!,
+                        style: const TextStyle(fontSize: 19, color: Colors.white),
                       ),
                     )
                   ],
                 ),
               ),
               ListTile(
-                leading: Icon(Icons.paypal),
-                title: Text("PayPal"),
+                leading: const Icon(Icons.paypal),
+                title: const Text("PayPal"),
                 onTap: () {},
               ),
               ListTile(
-                leading: Icon(Icons.home_work_outlined),
-                title: Text("Addr"),
+                leading: const Icon(Icons.home_work_outlined),
+                title: const Text("Addr"),
                 onTap: () {},
               ),
               ListTile(
-                leading: Icon(Icons.key),
-                title: Text("Password"),
+                leading: const Icon(Icons.key),
+                title: const Text("Password"),
                 onTap: () {},
               ),
               ListTile(
-                leading: Icon(Icons.logout),
-                title: Text("Logout"),
+                leading: const Icon(Icons.logout),
+                title: const Text("Logout"),
                 onTap: () {
                   FirebaseAuth.instance.signOut().then((value) =>
                       Navigator.of(context).pushReplacement(
-                          new MaterialPageRoute(
+                          MaterialPageRoute(
                             builder: (BuildContext context) {
-                              return new login_page();
+                              return login_page();
                             },
                           )));
                 },
@@ -126,96 +128,88 @@ class _home_pageState extends State<home_page> {
       decoration: BoxDecoration(
           color: ColorManager.white,
           border: Border.all(color: ColorManager.black),
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(15), topRight: Radius.circular(15))
               .w),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Container(
-            child: Column(
-              children: [
-                IconButton(
-                    enableFeedback: false,
-                    onPressed: () {
-                      checkuser();
-                      setState(() {
-                        index = 0;
-                      });
-                    },
-                    icon: Icon(
-                      Icons.home,
-                      color: ColorManager.green,
-                      size: 30.r,
-                    )),
-                Text(
-                  "HOME",
-                  style: newgetTextStyle(
-                      12.sp, FontWeightManager.semiBold, ColorManager.green),
-                )
-              ],
-            ),
+          Column(
+            children: [
+              IconButton(
+                  enableFeedback: false,
+                  onPressed: () {
+                    checkUser();
+                    setState(() {
+                      index = 0;
+                    });
+                  },
+                  icon: Icon(
+                    Icons.home,
+                    color: ColorManager.green,
+                    size: 30.r,
+                  )),
+              Text(
+                "HOME",
+                style: newgetTextStyle(
+                    12.sp, FontWeightManager.semiBold, ColorManager.green),
+              )
+            ],
           ),
-          Container(
-            child: Column(
-              children: [
-                IconButton(
-                    enableFeedback: false,
-                    onPressed: () {
-                      setState(() {
-                        index = 1;
-                      });
-                    },
-                    icon: Icon(
-                      Icons.group,
-                      color: ColorManager.green,
-                      size: 30.r,
-                    )),
-                Text(
-                  "VENDORS",
-                  style: newgetTextStyle(
-                      12.sp, FontWeightManager.semiBold, ColorManager.green),
-                )
-              ],
-            ),
+          Column(
+            children: [
+              IconButton(
+                  enableFeedback: false,
+                  onPressed: () {
+                    setState(() {
+                      index = 1;
+                    });
+                  },
+                  icon: Icon(
+                    Icons.group,
+                    color: ColorManager.green,
+                    size: 30.r,
+                  )),
+              Text(
+                "VENDORS",
+                style: newgetTextStyle(
+                    12.sp, FontWeightManager.semiBold, ColorManager.green),
+              )
+            ],
           ),
-          Container(
-            child: Column(
-              children: [
-                IconButton(
-                    enableFeedback: false,
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.list,
-                      color: ColorManager.green,
-                      size: 30.r,
-                    )),
-                Text(
-                  "LIST",
-                  style: newgetTextStyle(
-                      12.sp, FontWeightManager.semiBold, ColorManager.green),
-                )
-              ],
-            ),
+          Column(
+            children: [
+              IconButton(
+                  enableFeedback: false,
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.list,
+                    color: ColorManager.green,
+                    size: 30.r,
+                  )),
+              Text(
+                "LIST",
+                style: newgetTextStyle(
+                    12.sp, FontWeightManager.semiBold, ColorManager.green),
+              )
+            ],
           ),
-          Container(
-            child: Column(
-              children: [
-                IconButton(
-                    enableFeedback: false,
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.category_outlined,
-                      color: ColorManager.green,
-                      size: 30.r,
-                    )),
-                Text(
-                  "CATEGORIES",
-                  style: newgetTextStyle(
-                      12.sp, FontWeightManager.semiBold, ColorManager.green),
-                )
-              ],
-            ),
+          Column(
+            children: [
+              IconButton(
+                  enableFeedback: false,
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.category_outlined,
+                    color: ColorManager.green,
+                    size: 30.r,
+                  )),
+              Text(
+                "CATEGORIES",
+                style: newgetTextStyle(
+                    12.sp, FontWeightManager.semiBold, ColorManager.green),
+              )
+            ],
           ),
           Container(
 
@@ -318,30 +312,84 @@ class _home_pageState extends State<home_page> {
     );
   }
 
-  checkuser() async {
+  checkUser() async {
 
-    var users =FirebaseFirestore.instance.collection("Users");
+    await FirebaseFirestore.instance.collection("Users").doc(currentUser!).get().then((DocumentSnapshot user){
+      if(user.exists)
+        print(user['Email']);
+      else {
+        print("Not Found");
+        final newUser = <String, String>{
+          "Email": currentUser!
+        };
+        dbUser.add(newUser);
+        print(newUser.toString());
+      }
+    });
 
-    print(users.id);
+    /*await dbUser.doc(currentUser).get().then((DocumentSnapshot snap) async{
+        if(snap.exists) {
+          print(snap['Email']);
+        }
+        else {
+          final newUser = <String, String>{
+            "EMail": currentUser!
+          };
+          dbUser.add(newUser);
+          print(newUser.toString());
+          snap['Email'];
+        }
+    });*/
+    //
+    // await dbUser.doc(currentUser).get().then((DocumentSnapshot snap) async{
+    //   if(snap.exists) {
+    //     print(snap['Email']);
+    //   }
+    // });
+    //Future<DocumentSnapshot<Map<String, dynamic>>> _collectionRef =    FirebaseFirestore.instance.collection(currentUser!).doc().get().then((DocumentSnapshot snap){
+     // if(snap!=null)
+    //  print(snap['program_name']);
+
+   // });
+
+      // Get docs from collection reference
+     // print(_collectionRef);
+     // QuerySnapshot querySnapshot = await _collectionRef.get();
+
+      // // Get data from docs and convert map to List
+      // final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
+      //
+      // print(allData);
+    //  _getLoyaltyCard()
+
+        // else
+        //   print("Not found");
+
+    
+    
+
+
+  //  print(users.id);
 
     // users.doc("Users/${user.email}").forEach((element){
     //
     // });
 
-    CollectionReference _collectionRef = FirebaseFirestore.instance.collection('Users');
+   //  CollectionReference _collectionRef = FirebaseFirestore.instance.collection('Users');
+   //
+   //
+   //  QuerySnapshot querySnapshot = await _collectionRef.get();
+   //  final allData = querySnapshot.docs.map((doc) => doc.data());
+   //
+   // // print(allData);
+   //
+   //  allData.forEach((element){
+   //    //print("$element  Element");
+   //   // print("${user.email}  EMail");
+   //   // print(element!["Email"]==user.email  );
+   //  });
+   //
 
-
-    QuerySnapshot querySnapshot = await _collectionRef.get();
-    final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
-
-    print(allData);
-
-    Object nUser=Object();
-    nUser=
-    allData.forEach((element){
-      print(element=={Email: "zala@gmail.com"});
-
-    });
     //print(temp);
   }
 }
@@ -351,10 +399,8 @@ class Page1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Center(
-        child: Icon(Icons.home),
-      ),
-    );
+    return const Center(
+    child: Icon(Icons.home),
+      );
   }
 }

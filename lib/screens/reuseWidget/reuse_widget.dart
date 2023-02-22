@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:assign_1/resources/resources.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,8 +30,8 @@ class textfield extends StatelessWidget {
           if (label == "Password" || label == "Confirm-Password") {
             if (value == null || value.isEmpty) {
               return 'Please enter text';
-            } else if (value.length < 8) {
-              return 'Please enter more than 8 characters';
+            } else if (value.length < 6) {
+              return 'Please enter more than 6 characters';
             }
           } else if (label == "E-mail") {
             if (value == null || value.isEmpty) {
@@ -39,7 +41,7 @@ class textfield extends StatelessWidget {
               return 'Please enter a valid email address';
             }
           } else {
-            if (value == null || value.isEmpty) {
+            if (value == null || !value.isEmpty) {
               return 'Please enter text';
             }
           }
@@ -79,13 +81,15 @@ class buttons extends StatelessWidget {
     return TextButton(
         onPressed: () async {
           if (navigation == "Signup") {
+
             Navigator.pushNamed(context, "$navigation");
           } else if (formKey.currentState!.validate() &&
               label == "Create Account") {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Account is created')),
-            );
+         //   FirebaseFirestore.instance.disableNetwork();
+         //   FirebaseFirestore.instance.enableNetwork();
             Fire_base().signup(Econtroller!, Pcontroller!);
+
+
           } else if (label == "Sign-In") {
            // debugPrint("Sign-In");
             Fire_base().singIn(Econtroller!, Pcontroller!);

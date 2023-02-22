@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../reuseWidget/reuse_widget.dart';
 
-class forget_pass extends StatelessWidget {
+class ForgetPass extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController forgetpass = TextEditingController();
+  TextEditingController forgetPass = TextEditingController();
+
+  ForgetPass({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +29,12 @@ class forget_pass extends StatelessWidget {
                     label: "E-mail",
                     icon: Icons.email,
                     disabled: false,
-                    Tcontroller: forgetpass),
+                    Tcontroller: forgetPass),
                 buttons(
                   label: "Reset-password",
                   navigation: "null",
                   formKey: _formKey,
-                  Econtroller: forgetpass,
+                  Econtroller: forgetPass,
                 )
               ],
             ),

@@ -1,11 +1,63 @@
+import 'package:assign_1/models/_loyalti_card_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:assign_1/resources/resources.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../models/Loyalcard.dart';
 
-class loyal_card extends StatelessWidget {
-  const loyal_card({Key? key}) : super(key: key);
+class loyal_card extends StatefulWidget {
+  @override
+  State<loyal_card> createState() => _loyal_cardState();
+}
 
+class _loyal_cardState extends State<loyal_card> {
+
+  Loyalcard cardMainData=Loyalcard();
+  LoyaltyCardListModel? model;
+
+  @override
+  void initState() {
+    super.initState();
+    getLoyaltyCardData();
+  }
+
+  Future<void> getLoyaltyCardData() async {
+    var currentUser=FirebaseAuth.instance.currentUser?.email;
+    await FirebaseFirestore.instance.collection(currentUser!).get().then((QuerySnapshot carddata){
+
+      Map<String,dynamic> maindata={};
+      List<Map<String, dynamic>>? list = [];
+
+      list = carddata.docs.map((doc) => doc.data() ).cast<Map<String, dynamic>>().toList();
+      print(list[0]['programName']);
+      maindata.addAll({"list": list});
+      //model= LoyaltyCardListModel.fromJson(maindata);
+      setState(() {
+        model= LoyaltyCardListModel.fromJson(maindata);
+      });
+       print(model?.list?[1].url);
+     //  cardd=model;
+
+      //print(list);
+   /*    carddata.docs.toList();
+     //  print(carddata.docs.first.data().toString());
+       List<Map<dynamic, dynamic>> list = [];
+
+       carddata.docs.forEach((element) {
+         list.add(element.data());
+   *//* print(element.data().toString());
+});*/
+     //  var model= LoyaltyCardModel.fromJson(carddata.docs.first);
+      // print(model.url);
+
+      //debugPrint(carddata.toString());
+
+
+      // list = snapshot.docs.map((doc) => doc.data() ).toList();
+    });
+  }
 
 
   @override
@@ -17,7 +69,9 @@ class loyal_card extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 color: Colors.white,
-                boxShadow: [BoxShadow(color: Colors.black,blurStyle: BlurStyle.inner)],
+                boxShadow: [
+                  BoxShadow(color: Colors.black, blurStyle: BlurStyle.inner)
+                ],
               ),
               margin: EdgeInsets.only(top: 5).r,
               child: Column(
@@ -29,9 +83,18 @@ class loyal_card extends StatelessWidget {
                         margin: EdgeInsets.only(left: 5).r,
                         child: Row(
                           children: [
-                            Icon(Icons.arrow_back,size: 30,),
-                            SizedBox(width: 10.w,),
-                            Text("Loyalty Cards",style: TextStyle(fontSize: 20.sp,fontWeight: FontWeight.w500),)
+                            Icon(
+                              Icons.arrow_back,
+                              size: 30,
+                            ),
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            Text(
+                              "Loyalty Cards",
+                              style: TextStyle(
+                                  fontSize: 20.sp, fontWeight: FontWeight.w500),
+                            )
                           ],
                         ),
                       ),
@@ -39,22 +102,37 @@ class loyal_card extends StatelessWidget {
                         margin: EdgeInsets.only(right: 10).r,
                         child: Row(
                           children: [
-                            Icon(Icons.search,size: 30,),
-                            SizedBox(width: 10.w,),
-                            Icon(Icons.document_scanner_outlined,size: 30,)
+                            Icon(
+                              Icons.search,
+                              size: 30,
+                            ),
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            Icon(
+                              Icons.document_scanner_outlined,
+                              size: 30,
+                            )
                           ],
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 18.h,),
+                  SizedBox(
+                    height: 18.h,
+                  ),
                   Container(
-                    margin: EdgeInsets.only(left: 10,).r,
+                    margin: EdgeInsets.only(
+                      left: 10,
+                    ).r,
                     child: Row(
                       children: [
                         Container(
                           //It show the loaction of the shop
-                          margin: EdgeInsets.only(left: 1, top: 5,).r,
+                          margin: EdgeInsets.only(
+                            left: 1,
+                            top: 5,
+                          ).r,
                           height: 23.h,
                           child: Image.asset(
                             //image of location icon
@@ -73,23 +151,90 @@ class loyal_card extends StatelessWidget {
                       ],
                     ),
                   ),
-
                 ],
               ),
             ),
 
+            /*cardd.list?.length==0 ? Center(
+              child: CircularProgressIndicator(
+
+              ),
+            ):*/
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                // implement GridView.builder
+                child: GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent: 200,
+                            childAspectRatio: 6 / 5,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10),
+                    itemCount: model?.list?.length, //cardd.list?.length,
+                    itemBuilder: (BuildContext ctx, index) {
+                      return Column(
+                        children: [
+                          Expanded(
+                            child: Card(
+                              color: Colors.cyan,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Container(
+                                        child: PopupMenuButton(
+                                          icon: Icon(Icons.more_vert),
+                                          // Callback that sets the selected popup menu item.
+                                          itemBuilder: (BuildContext context) =>
+                                              <PopupMenuEntry>[
+                                            PopupMenuItem(
+                                              child: TextButton(
+                                                  onPressed: () {
+                                                    Navigator.pushNamed(
+                                                        context, "userDataField");
+                                                  },
+                                                  child: Text("Edit")),
+                                            ),
+                                            PopupMenuItem(
+                                              child: TextButton(
+                                                  onPressed: () {},
+                                                  child: Text("Delete")),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  const CircleAvatar(
+                                    radius: 30,
+                                    child: Icon(Icons.rounded_corner),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          Text(model?.list![index].programName??'d'),
+                        //  Text(cardMainData[index].programName),
+                        ],
+                      );
+                    }),
+              ),
+            ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
-        onPressed: (){
+        onPressed: () {
+
           Navigator.pushNamed(context, "userDataField");
         },
-        child: Icon(Icons.edit,),
+        child: Icon(
+          Icons.edit,
+        ),
       ),
     );
   }
 }
-
-
