@@ -18,7 +18,7 @@ class signup extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            view_design(
+            const view_design(
               label: "Create Account",
               height: 200,
             ),

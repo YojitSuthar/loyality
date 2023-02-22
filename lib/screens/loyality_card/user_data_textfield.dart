@@ -1,4 +1,3 @@
-import 'package:assign_1/resources/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -18,7 +17,7 @@ class userDataField extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.only(top: 5),
+              margin: const EdgeInsets.only(top: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -26,9 +25,14 @@ class userDataField extends StatelessWidget {
                     margin: EdgeInsets.only(left: 5).r,
                     child: Row(
                       children: [
-                        Icon(
-                          Icons.arrow_back,
-                          size: 30,
+                        IconButton(
+                          icon: const Icon(
+                            Icons.arrow_back,
+                            size: 30,
+                          ),
+                          onPressed: (){
+                            Navigator.pop(context);
+                          },
                         ),
                         SizedBox(
                           width: 10.w,
@@ -51,17 +55,16 @@ class userDataField extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        child: Text(
-                            "Scan your card barcode or QR code and enter the following info as you prefer to link it to your card"),
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                             top: 40, bottom: 40, left: 45, right: 45)
                             .w,
-                      ),
-                      Container(
-                        child: Icon(
-                          Icons.qr_code_2,
-                          size: 100,
+                        child: const Text(
+                            "Scan your card barcode or QR code and enter the following info as you prefer to link it to your card"
                         ),
+                      ),
+                      const Icon(
+                        Icons.qr_code_2,
+                        size: 100,
                       ),
                       SizedBox(
                         height: 10.h,
@@ -95,7 +98,7 @@ class userDataField extends StatelessWidget {
                     controller: notes_controller,
                     label: "Notes",
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Container(
@@ -103,9 +106,9 @@ class userDataField extends StatelessWidget {
                     margin: EdgeInsets.only(left: 15,right: 15),
                       child:
                           ElevatedButton(style: ElevatedButton.styleFrom(
-                            primary: Colors.green,
-                            padding: EdgeInsets.all(20),
-                          ),onPressed: () {}, child: Text("Save")))
+                            backgroundColor: Colors.green,
+                            padding: const EdgeInsets.all(20),
+                          ),onPressed: () {}, child: const Text("Save")))
                 ],
               ),
             ),
@@ -165,9 +168,9 @@ class card extends StatelessWidget {
             )),
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Text(
-          "$label",
+          label,
           style: newgetTextStyle(
               15.0, FontWeightManager.super_bold, ColorManager.green),
         ),

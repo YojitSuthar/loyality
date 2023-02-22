@@ -9,15 +9,15 @@ class textfield extends StatelessWidget {
   final bool disabled;
   final TextEditingController Tcontroller;
   textfield(
-      {required this.label,
+      {super.key, required this.label,
       required this.icon,
       required this.disabled,
       required this.Tcontroller});
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10).r,
-      padding: EdgeInsets.only(left: 20, top: 5, bottom: 5).r,
+      margin: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10).r,
+      padding: const EdgeInsets.only(left: 20, top: 5, bottom: 5).r,
       decoration: BoxDecoration(
           border: Border.all(color: GradientColorManager.g2_color),
           borderRadius: BorderRadius.circular(14.w)),
@@ -51,8 +51,8 @@ class textfield extends StatelessWidget {
             icon,
             color: ColorManager.teal,
           ),
-          hintText: "$label",
-          contentPadding: EdgeInsets.only(left: 15).r,
+          hintText: label,
+          contentPadding: const EdgeInsets.only(left: 15).r,
           border: InputBorder.none,
         ),
       ),
@@ -68,7 +68,7 @@ class buttons extends StatelessWidget {
   TextEditingController? Pcontroller;
 
   buttons(
-      {required this.label,
+      {super.key, required this.label,
       required this.navigation,
       required this.formKey,
       this.Econtroller,
@@ -79,7 +79,7 @@ class buttons extends StatelessWidget {
     return TextButton(
         onPressed: () async {
           if (navigation == "Signup") {
-            Navigator.pushNamed(context, "$navigation");
+            Navigator.pushNamed(context, navigation);
           } else if (formKey.currentState!.validate() &&
               label == "Create Account") {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -99,7 +99,7 @@ class buttons extends StatelessWidget {
             );
           } else {
             if (formKey.currentState!.validate()) {
-              Navigator.pushNamed(context, "$navigation");
+              Navigator.pushNamed(context, navigation);
             }
           }
         },
@@ -117,7 +117,7 @@ class buttons extends StatelessWidget {
               borderRadius: BorderRadius.circular(30).w),
           child: Center(
               child: Text(
-            "$label",
+            label,
             style: getTextStyle(20.sp, "Madurai", ColorManager.white),
           )),
         ));
@@ -125,9 +125,9 @@ class buttons extends StatelessWidget {
 }
 
 class view_design extends StatelessWidget {
-  late final String label;
+  final String label;
   final int height;
-  view_design({
+  const view_design({super.key,
     required this.label,
     required this.height,
   });
@@ -147,13 +147,13 @@ class view_design extends StatelessWidget {
                 GradientColorManager.g2_color
               ]),
           borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(30).w,
-                  bottomLeft: Radius.circular(30))
+                  bottomRight: const Radius.circular(30).w,
+                  bottomLeft: const Radius.circular(30))
               .w,
         ),
         child: Center(
           child: Text(
-            "$label",
+            label,
             style:
                 getTextStyle(33.sp, "Orbitron", GradientColorManager.g3_color),
           ),

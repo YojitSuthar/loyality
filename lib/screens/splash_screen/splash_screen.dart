@@ -4,9 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:assign_1/resources/resources.dart';
 import '../home_page/homePage.dart';
 import '../login_page/loginPage.dart';
-import '../loyality_card/loyallity_card.dart';
 
 class splash_screen extends StatefulWidget {
+  const splash_screen({super.key});
+
   @override
   State<splash_screen> createState() => _splash_screenState();
 }
@@ -23,18 +24,18 @@ class _splash_screenState extends State<splash_screen> {
   }
 
   void Navigate_Login() async {
-    Duration time = Duration(seconds: 3);
+    Duration time = const Duration(seconds: 3);
     await Future.delayed(time, () {});
     if (user != null) {
-      Navigator.of(context).pushReplacement(new MaterialPageRoute(
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (BuildContext context) {
-          return new home_page();
+          return const home_page();
         },
       ));
     } else {
-      Navigator.of(context).pushReplacement(new MaterialPageRoute(
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (BuildContext context) {
-          return new login_page();
+          return const login_page();
         },
       ));
     }

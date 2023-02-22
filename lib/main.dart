@@ -33,6 +33,7 @@ class myApp extends StatelessWidget {
             "forgetPass":(context) =>forget_pass(),
             "loyal_card":(context) =>loyal_card(),
             "userDataField":(context)=>userDataField(),
+            "Edit":(context) =>userDataField(),
           },
         );
       },
