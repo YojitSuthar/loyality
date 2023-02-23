@@ -5,6 +5,8 @@ import 'package:assign_1/screens/reuseWidget/reuse_widget.dart';
 
 class login_page extends StatefulWidget {
   static String id="login_page";
+
+  const login_page({super.key});
   @override
   State<login_page> createState() => _login_pageState();
 }

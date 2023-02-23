@@ -67,20 +67,20 @@ class _loyal_cardState extends State<loyal_card> {
         child: Column(
           children: [
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 boxShadow: [
                   BoxShadow(color: Colors.black, blurStyle: BlurStyle.inner)
                 ],
               ),
-              margin: EdgeInsets.only(top: 5).r,
+              margin: const EdgeInsets.only(top: 5).r,
               child: Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        margin: EdgeInsets.only(left: 5).r,
+                        margin: const EdgeInsets.only(left: 5).r,
                         child: Row(
                           children: [
                             Icon(
@@ -99,17 +99,17 @@ class _loyal_cardState extends State<loyal_card> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(right: 10).r,
+                        margin: const EdgeInsets.only(right: 10).r,
                         child: Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.search,
                               size: 30,
                             ),
                             SizedBox(
                               width: 10.w,
                             ),
-                            Icon(
+                            const Icon(
                               Icons.document_scanner_outlined,
                               size: 30,
                             )
@@ -122,14 +122,14 @@ class _loyal_cardState extends State<loyal_card> {
                     height: 18.h,
                   ),
                   Container(
-                    margin: EdgeInsets.only(
+                    margin: const EdgeInsets.only(
                       left: 10,
                     ).r,
                     child: Row(
                       children: [
                         Container(
                           //It show the loaction of the shop
-                          margin: EdgeInsets.only(
+                          margin: const EdgeInsets.only(
                             left: 1,
                             top: 5,
                           ).r,
@@ -228,13 +228,14 @@ class _loyal_cardState extends State<loyal_card> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
         onPressed: () {
-
           Navigator.pushNamed(context, "userDataField");
         },
-        child: Icon(
-          Icons.edit,
+        child: const Icon(
+          Icons.add,
         ),
       ),
     );
   }
 }
+
+

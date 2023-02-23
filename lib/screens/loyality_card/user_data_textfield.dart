@@ -29,6 +29,10 @@ class UserDataTextFieldState extends State<UserDataField> {
 
   TextEditingController notesController = TextEditingController();
 
+   String label;
+   String value;
+  UserDataField({ required this.label,required this.value});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,15 +48,20 @@ class UserDataTextFieldState extends State<UserDataField> {
                     margin: const EdgeInsets.only(left: 5).r,
                     child: Row(
                       children: [
-                        const Icon(
-                          Icons.arrow_back,
-                          size: 30,
+                        IconButton(
+                          icon: const Icon(
+                            Icons.arrow_back,
+                            size: 30,
+                          ),
+                          onPressed: (){
+                            Navigator.pop(context);
+                          },
                         ),
                         SizedBox(
                           width: 10.w,
                         ),
                         Text(
-                          "New Card",
+                          label,
                           style: TextStyle(
                               fontSize: 20.sp, fontWeight: FontWeight.w500),
                         )
