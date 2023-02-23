@@ -29,7 +29,7 @@ class _splash_screenState extends State<splash_screen> {
     if (user != null) {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (BuildContext context) {
-          return new HomePage();
+          return const HomePage();
         },
       ));
     } else {

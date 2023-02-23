@@ -1,4 +1,3 @@
-import 'package:assign_1/resources/resources.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:assign_1/screens/reuseWidget/reuse_widget.dart';
@@ -22,7 +21,7 @@ class _login_pageState extends State<login_page> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            view_design(label: "Zignuts Technolab",height: 330),
+            const view_design(label: "Zignuts Technolab",height: 330),
             SizedBox(
               height: 10.h,
             ),

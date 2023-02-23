@@ -10,16 +10,15 @@ import 'loyallity_card.dart';
 class UserDataField extends StatefulWidget {
   String label;
   String value;
-  UserDataField({required this.label,required this.value});
-
+  UserDataField({required this.label, required this.value});
 
   @override
   State<UserDataField> createState() => UserDataTextFieldState();
 }
 
 class UserDataTextFieldState extends State<UserDataField> {
-
-  var db=FirebaseFirestore.instance.collection(FirebaseAuth.instance.currentUser!.email!);
+  var db = FirebaseFirestore.instance
+      .collection(FirebaseAuth.instance.currentUser!.email!);
 
   TextEditingController cardController = TextEditingController();
 
@@ -31,16 +30,14 @@ class UserDataTextFieldState extends State<UserDataField> {
 
   TextEditingController notesController = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
+  String dropDownValue = 'Rupay Card';
 
-
-    final args=(ModalRoute.of(context)?.settings.arguments ?? <String,dynamic>{}) as Map;
-
-    print(args['index']);
-  }
-
+  var items = [
+    'Rupay Card',
+    'Visa Card',
+    'Credit Card',
+    'None',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +59,7 @@ class UserDataTextFieldState extends State<UserDataField> {
                             Icons.arrow_back,
                             size: 30,
                           ),
-                          onPressed: (){
+                          onPressed: () {
                             Navigator.pop(context);
                           },
                         ),
@@ -87,11 +84,11 @@ class UserDataTextFieldState extends State<UserDataField> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
+                        child: const Text(
+                            "Scan your card barcode or QR code and enter the following info as you prefer to link it to your card"),
                         padding: const EdgeInsets.only(
                             top: 40, bottom: 40, left: 45, right: 45)
                             .w,
-                        child: const Text(
-                            "Scan your card barcode or QR code and enter the following info as you prefer to link it to your card"),
                       ),
                       const Icon(
                         Icons.qr_code_2,
@@ -113,10 +110,40 @@ class UserDataTextFieldState extends State<UserDataField> {
                     controller: cardController,
                     label: "Card number",
                   ),
-                  CardFromField(
-                    controller: vendorController,
-                    label: "Vendor Card",
-                  ),
+                  Container(
+                      height: 60,
+                      margin: const EdgeInsets.only(
+                          left: 10, right: 10, top: 10, bottom: 10),
+                      padding: const EdgeInsets.only(
+                          left: 20, top: 5, bottom: 5, right: 20),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: GradientColorManager.g2_color),
+                          borderRadius: BorderRadius.circular(14)),
+                      child: Center(
+                          child: DropdownButton(
+                        // Initial Value
+                        value: dropDownValue,
+                        // Down Arrow Icon
+                        icon: const Icon(Icons.keyboard_arrow_down),
+                        isExpanded: true,
+                        // Array list of items
+                        items: items.map((String items) {
+                          return DropdownMenuItem(
+                            value: items,
+                            child: Text(items),
+                          );
+                        }).toList(),
+                        isDense: true,
+                        underline: Container(),
+                        // After selecting the desired option,it will
+                        // change button value to selected value
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            dropDownValue = newValue!;
+                            // widget.a=dropdownvalue;
+                          });
+                        },
+                      ))),
                   CardFromField(
                     controller: programController,
                     label: "Program Name",
@@ -134,14 +161,16 @@ class UserDataTextFieldState extends State<UserDataField> {
                   ),
                   Container(
                       padding: const EdgeInsets.all(10),
-                      margin: const EdgeInsets.only(left: 15,right: 15),
-                      child:
-                      ElevatedButton(style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                        padding: const EdgeInsets.all(20),
-                      ),onPressed: () {
-                        addDataFirestore();
-                      }, child: Text(widget.value)))
+                      margin: const EdgeInsets.only(left: 15, right: 15),
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green,
+                            padding: const EdgeInsets.all(20),
+                          ),
+                          onPressed: () {
+                            addDataFirestore();
+                          },
+                          child: Text(widget.value)))
                 ],
               ),
             ),
@@ -152,9 +181,8 @@ class UserDataTextFieldState extends State<UserDataField> {
   }
 
   Future<void> addDataFirestore() async {
-
     final _loyaltycard = {
-      "id":"",
+      "id": "",
       "frontCardImg": "",
       "backCardImg": "",
       "cardNumber": cardController.text,
@@ -165,12 +193,15 @@ class UserDataTextFieldState extends State<UserDataField> {
     };
 
     db.add(_loyaltycard).then((value) {
-      db.doc(value.id).update({"id":value.id});
+      db.doc(value.id).update({"id": value.id});
     });
 
-    //var loyalModel= LoyaltyCardModel.fromJson(json);
+   //var loyalModel= LoyaltyCardModel.fromJson(json);
 
-    Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=> loyal_card()));
+    List<LoyaltyCardModel> listdata = [];
+
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => loyal_card()));
 
     /*   db.get().then((value) {
       listdata.clear();
@@ -187,20 +218,15 @@ class UserDataTextFieldState extends State<UserDataField> {
     //print(snap.data().toString());
     //   }
     // });
-
-
-
-
   }
-
 }
-
 
 class CardFromField extends StatelessWidget {
   final TextEditingController controller;
   final String label;
 
-  const CardFromField({super.key, required this.controller, required this.label});
+  const CardFromField(
+      {super.key, required this.controller, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -212,8 +238,7 @@ class CardFromField extends StatelessWidget {
           borderRadius: BorderRadius.circular(14.w)),
       child: TextFormField(
         controller: controller,
-        decoration:
-        InputDecoration(hintText: label, border: InputBorder.none),
+        decoration: InputDecoration(hintText: label, border: InputBorder.none),
       ),
     );
   }
@@ -241,9 +266,9 @@ class card extends StatelessWidget {
             width: 124,
             child: Center(
                 child: Icon(
-                  icons,
-                  size: 50,
-                )),
+              icons,
+              size: 50,
+            )),
           ),
         ),
         const SizedBox(height: 10),

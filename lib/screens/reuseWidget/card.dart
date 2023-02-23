@@ -18,7 +18,7 @@ class _cardState extends State<card> {
     return Card(
       child: ListTile(
         leading: widget.icon,
-        title: Text("${widget.label}",style: new_1TextStyle(18.sp, FontWeightManager.semiBold),),
+        title: Text(widget.label,style: new_1TextStyle(18.sp, FontWeightManager.semiBold),),
         onTap:(){
           Navigator.popAndPushNamed(context, 'loyal_card');
         },
