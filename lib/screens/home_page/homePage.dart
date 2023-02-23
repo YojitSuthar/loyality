@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                       Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
                             builder: (BuildContext context) {
-                              return login_page();
+                              return const login_page();
                             },
                           )));
                 },
@@ -211,100 +211,95 @@ class _HomePageState extends State<HomePage> {
               )
             ],
           ),
-          Container(
-
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  IconButton(
-                      enableFeedback: false,
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return Dialog(
-                                backgroundColor: Colors.transparent,
-                                child: Container(
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      card(
-                                          label: "Offers",
-                                          icon: Icon(
-                                            Icons.local_offer_sharp,
-                                            color: ColorManager.green,
-                                          )),
-                                      card(
-                                          label: "Notification",
-                                          icon: Icon(
-                                            Icons
-                                                .notification_important_outlined,
-                                            color: ColorManager.green,
-                                          )),
-                                      card(
-                                          label: "Coupons and Promos",
-                                          icon: Icon(
-                                            Icons.card_giftcard_sharp,
-                                            color: ColorManager.green,
-                                          )),
-                                      card(
-                                        label: "Loyalty Cards",
-                                        icon: Icon(
-                                          Icons.credit_card,
-                                          color: ColorManager.green,
-                                        ),
-                                        navigation: "loyal_card",
-                                      ),
-                                      card(
-                                          label: "Purchases",
-                                          icon: Icon(
-                                            Icons.shopping_bag,
-                                            color: ColorManager.green,
-                                          )),
-                                      card(
-                                          label: "Shopping Tips",
-                                          icon: Icon(
-                                            Icons.bookmark_add_rounded,
-                                            color: ColorManager.green,
-                                          )),
-                                      card(
-                                          label: "Reports",
-                                          icon: Icon(
-                                            Icons.report,
-                                            color: ColorManager.green,
-                                          )),
-                                      card(
-                                          label:
-                                              "Vendor Accounts & credentials",
-                                          icon: Icon(
-                                            Icons.account_circle_sharp,
-                                            color: ColorManager.green,
-                                          )),
-                                      card(
-                                          label: "Chat",
-                                          icon: Icon(
-                                            Icons.chat,
-                                            color: ColorManager.green,
-                                          )),
-                                    ],
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                IconButton(
+                    enableFeedback: false,
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Dialog(
+                              backgroundColor: Colors.transparent,
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  card(
+                                      label: "Offers",
+                                      icon: Icon(
+                                        Icons.local_offer_sharp,
+                                        color: ColorManager.green,
+                                      )),
+                                  card(
+                                      label: "Notification",
+                                      icon: Icon(
+                                        Icons
+                                            .notification_important_outlined,
+                                        color: ColorManager.green,
+                                      )),
+                                  card(
+                                      label: "Coupons and Promos",
+                                      icon: Icon(
+                                        Icons.card_giftcard_sharp,
+                                        color: ColorManager.green,
+                                      )),
+                                  card(
+                                    label: "Loyalty Cards",
+                                    icon: Icon(
+                                      Icons.credit_card,
+                                      color: ColorManager.green,
+                                    ),
+                                    navigation: "loyal_card",
                                   ),
-                                ),
-                              );
-                            });
-                      },
-                      icon: Icon(
-                        Icons.add,
-                        color: ColorManager.green,
-                        size: 30.r,
-                      )),
-                  Text(
-                    "MORE",
-                    style: newgetTextStyle(
-                        12.sp, FontWeightManager.semiBold, ColorManager.green),
-                  )
-                ],
-              ),
+                                  card(
+                                      label: "Purchases",
+                                      icon: Icon(
+                                        Icons.shopping_bag,
+                                        color: ColorManager.green,
+                                      )),
+                                  card(
+                                      label: "Shopping Tips",
+                                      icon: Icon(
+                                        Icons.bookmark_add_rounded,
+                                        color: ColorManager.green,
+                                      )),
+                                  card(
+                                      label: "Reports",
+                                      icon: Icon(
+                                        Icons.report,
+                                        color: ColorManager.green,
+                                      )),
+                                  card(
+                                      label:
+                                          "Vendor Accounts & credentials",
+                                      icon: Icon(
+                                        Icons.account_circle_sharp,
+                                        color: ColorManager.green,
+                                      )),
+                                  card(
+                                      label: "Chat",
+                                      icon: Icon(
+                                        Icons.chat,
+                                        color: ColorManager.green,
+                                      )),
+                                ],
+                              ),
+                            );
+                          });
+                    },
+                    icon: Icon(
+                      Icons.add,
+                      color: ColorManager.green,
+                      size: 30.r,
+                    )),
+                Text(
+                  "MORE",
+                  style: newgetTextStyle(
+                      12.sp, FontWeightManager.semiBold, ColorManager.green),
+                )
+              ],
             ),
           ),
         ],
@@ -315,9 +310,9 @@ class _HomePageState extends State<HomePage> {
   checkUser() async {
 
     await FirebaseFirestore.instance.collection("Users").doc(currentUser!).get().then((DocumentSnapshot user){
-      if(user.exists)
+      if(user.exists) {
         print(user['Email']);
-      else {
+      } else {
         print("Not Found");
         final newUser = <String, String>{
           "Email": currentUser!

@@ -14,7 +14,7 @@ class ForgetPass extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          view_design(
+          const view_design(
             label: "Forget Password",
             height: 200,
           ),

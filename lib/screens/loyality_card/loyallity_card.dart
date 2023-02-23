@@ -6,7 +6,10 @@ import 'package:assign_1/resources/resources.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../models/Loyalcard.dart';
-
+enum MenuOptions {
+  item1,
+  item2,
+}
 class loyal_card extends StatefulWidget {
   @override
   State<loyal_card> createState() => _loyal_cardState();
@@ -179,39 +182,36 @@ class _loyal_cardState extends State<loyal_card> {
                         children: [
                           Expanded(
                             child: Card(
-                              color: Colors.cyan,
+                              color: Colors.green[500],
                               child: Column(
                                 children: [
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      Container(
-                                        child: PopupMenuButton(
-                                          icon: Icon(Icons.more_vert),
-                                          // Callback that sets the selected popup menu item.
-                                          itemBuilder: (BuildContext context) =>
-                                              <PopupMenuEntry>[
-                                            PopupMenuItem(
-                                              child: TextButton(
-                                                  onPressed: () {
-                                                    Navigator.pushNamed(
-                                                        context, "EdituserDataField");
-                                                  },
-                                                  child: Text("Edit")),
-                                            ),
-                                            PopupMenuItem(
-                                              child: TextButton(
-                                                  onPressed: () {},
-                                                  child: Text("Delete")),
-                                            ),
-                                          ],
-                                        ),
+                                      PopupMenuButton<MenuOptions>(
+                                        icon: const Icon(Icons.more_vert),
+                                        position: PopupMenuPosition.under,
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                        // constraints: BoxConstraints.expand(width: 150),
+                                        onSelected: (MenuOption){
+                                          if(MenuOption==MenuOptions.item1){
+                                            Navigator.pushNamed(context, "EdituserDataField");
+                                          }
+                                        },
+                                        itemBuilder: (BuildContext context) =>[
+                                          PopupMenuItem(child: Text('Edit',style: TextStyle(color: Colors.green),),value: MenuOptions.item1,),
+                                          PopupMenuDivider(height: 1,),
+                                          PopupMenuItem(
+                                            child:  Text("Delete",style: TextStyle(color: Colors.lightGreen),),
+                                            value: MenuOptions.item2,
+                                          ),
+                                        ],
                                       )
                                     ],
                                   ),
-                                  const CircleAvatar(
+                                   CircleAvatar(
                                     radius: 30,
-                                    child: Icon(Icons.rounded_corner),
+                                    child: Text(model?.list![index].programName![0].toUpperCase()??'d',style: TextStyle(fontSize: 50),),
                                   )
                                 ],
                               ),
