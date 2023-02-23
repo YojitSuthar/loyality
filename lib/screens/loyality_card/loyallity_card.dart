@@ -14,8 +14,9 @@ class loyal_card extends StatefulWidget {
 
 class _loyal_cardState extends State<loyal_card> {
 
-  Loyalcard cardMainData=Loyalcard();
+ // Loyalcard cardMainData=Loyalcard();
   LoyaltyCardListModel? model;
+
 
   @override
   void initState() {
@@ -26,6 +27,8 @@ class _loyal_cardState extends State<loyal_card> {
   Future<void> getLoyaltyCardData() async {
     var currentUser=FirebaseAuth.instance.currentUser?.email;
     await FirebaseFirestore.instance.collection(currentUser!).get().then((QuerySnapshot carddata){
+
+    //  final modelData=Loyalcard.fromJson(carddata)
 
       Map<String,dynamic> maindata={};
       List<Map<String, dynamic>>? list = [];

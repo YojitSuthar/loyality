@@ -11,15 +11,16 @@ class Loyalcard {
   String? notes;
   String? vendorList;
 
-  Loyalcard(
-      {this.id,
-        this.frontCardImg,
-        this.backCardImg,
-        this.cardNumber,
-        this.programName,
-        this.url,
-        this.notes,
-        this.vendorList});
+  Loyalcard({
+    this.id='',
+    required this.frontCardImg,
+    required this.backCardImg,
+    required this.cardNumber,
+    required this.programName,
+    required this.url,
+    required this.notes,
+    required this.vendorList
+  });
 
   Loyalcard.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -32,16 +33,14 @@ class Loyalcard {
     vendorList = json['vendorList'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['frontCardImg'] = this.frontCardImg;
-    data['backCardImg'] = this.backCardImg;
-    data['cardNumber'] = this.cardNumber;
-    data['programName'] = this.programName;
-    data['url'] = this.url;
-    data['notes'] = this.notes;
-    data['vendorList'] = this.vendorList;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+    'id' : this.id,
+    'frontCardImg' : this.frontCardImg,
+    'backCardImg' : this.backCardImg,
+    'cardNumber' : this.cardNumber,
+    'programName' : this.programName,
+    'url' : this.url,
+    'notes' : this.notes,
+    'vendorList' : this.vendorList
+  };
 }

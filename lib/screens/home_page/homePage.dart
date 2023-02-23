@@ -319,10 +319,10 @@ class _HomePageState extends State<HomePage> {
         print(user['Email']);
       else {
         print("Not Found");
-        final newUser = <String, String>{
+        final newUser = <String, dynamic>{
           "Email": currentUser!
         };
-        dbUser.add(newUser);
+        dbUser.doc(currentUser).set(newUser);
         print(newUser.toString());
       }
     });
