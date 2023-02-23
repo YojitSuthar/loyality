@@ -39,7 +39,7 @@ class textfield extends StatelessWidget {
               return 'Please enter a valid email address';
             }
           } else {
-            if (value == null || !value.isEmpty) {
+            if (value == null || value.isEmpty) {
               return 'Please enter text';
             }
           }

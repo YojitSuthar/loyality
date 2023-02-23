@@ -1,4 +1,5 @@
 import 'package:assign_1/models/_loyalti_card_model.dart';
+import 'package:assign_1/screens/loyality_card/user_data_textfield.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -48,10 +49,7 @@ class _loyal_cardState extends State<loyal_card> {
     setState(() async {
       await FirebaseFirestore.instance.collection(currentUser!).doc(index).delete().then((value) => debugPrint("done"));
     });
-
-
  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -185,7 +183,13 @@ class _loyal_cardState extends State<loyal_card> {
                                         // constraints: BoxConstraints.expand(width: 150),
                                         onSelected: (MenuOption){
                                           if(MenuOption==MenuOptions.item1){
+                                            final id=model?.list![index].id??'id';
                                             Navigator.pushNamed(context, "EdituserDataField");
+                                            Navigator.push(context, MaterialPageRoute(builder: (context) => UserDataField(id: id,value: "Update",label: "Edit",)));
+                                          } else if(MenuOption==MenuOptions.item2){
+                                            setState(() {
+                                              removeCard(model?.list![index].id??'');
+                                            });
                                           }
                                         },
                                         itemBuilder: (BuildContext context) =>[

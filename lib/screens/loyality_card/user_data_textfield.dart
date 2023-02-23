@@ -10,8 +10,9 @@ import 'loyallity_card.dart';
 class UserDataField extends StatefulWidget {
   String label;
   String value;
-  UserDataField({required this.label, required this.value});
-
+  String? id;
+  UserDataField({required this.label, required this.value,this.id});
+  
   @override
   State<UserDataField> createState() => UserDataTextFieldState();
 }
@@ -19,6 +20,9 @@ class UserDataField extends StatefulWidget {
 class UserDataTextFieldState extends State<UserDataField> {
   var db = FirebaseFirestore.instance
       .collection(FirebaseAuth.instance.currentUser!.email!);
+
+  LoyaltyCardListModel? model;
+
 
   TextEditingController cardController = TextEditingController();
 
@@ -38,6 +42,31 @@ class UserDataTextFieldState extends State<UserDataField> {
     'Credit Card',
     'None',
   ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    setCardData();
+  }
+
+  Future<void> setCardData() async {
+
+    await db.doc(widget.id).get().then((DocumentSnapshot snap) async {
+      if (snap.exists) {
+        cardController.text = snap['cardNumber'];
+        programController.text=snap['programName'];
+        websiteController.text=snap['url'];
+        notesController.text=snap['notes'];
+        dropDownValue=snap['vendorList'];
+      }
+
+    });
+
+
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -168,7 +197,10 @@ class UserDataTextFieldState extends State<UserDataField> {
                             padding: const EdgeInsets.all(20),
                           ),
                           onPressed: () {
-                            addDataFirestore();
+                            if(widget.value.contains("Save"))
+                              addDataFirestore();
+                            else if(widget.value.contains("Update"))
+                              updateData();
                           },
                           child: Text(widget.value)))
                 ],
@@ -178,6 +210,26 @@ class UserDataTextFieldState extends State<UserDataField> {
         ),
       ),
     );
+  }
+  
+  Future<void> updateData()async {
+
+    final _loyaltycard = {
+      "id": widget.id,
+      "frontCardImg": "",
+      "backCardImg": "",
+      "cardNumber": cardController.text,
+      "programName": programController.text,
+      "url": websiteController.text,
+      "notes": notesController.text,
+      "vendorList": dropDownValue,
+    };
+    
+    db.doc(widget.id).update(_loyaltycard).then((value) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => loyal_card()));
+print("yes");
+    });
   }
 
   Future<void> addDataFirestore() async {
@@ -189,7 +241,7 @@ class UserDataTextFieldState extends State<UserDataField> {
       "programName": programController.text,
       "url": websiteController.text,
       "notes": notesController.text,
-      "vendorList": "Visa",
+      "vendorList": dropDownValue,
     };
 
     db.add(_loyaltycard).then((value) {
