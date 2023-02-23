@@ -3,26 +3,26 @@ import 'package:assign_1/resources/resources.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../authentication/authfile.dart';
 
-class textfield extends StatelessWidget {
-  late final String label;
+class UserTextField extends StatelessWidget {
+  final String label;
   final IconData? icon;
   final bool disabled;
-  final TextEditingController Tcontroller;
-  textfield(
+  final TextEditingController tController;
+  const UserTextField(
       {super.key, required this.label,
       required this.icon,
       required this.disabled,
-      required this.Tcontroller});
+      required this.tController});
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10).r,
       padding: const EdgeInsets.only(left: 20, top: 5, bottom: 5).r,
       decoration: BoxDecoration(
-          border: Border.all(color: GradientColorManager.g2_color),
+          border: Border.all(color: GradientColorManager.g2Color),
           borderRadius: BorderRadius.circular(14.w)),
       child: TextFormField(
-        controller: Tcontroller,
+        controller: tController,
         textInputAction: TextInputAction.none,
         validator: (value) {
           if (label == "Password" || label == "Confirm-Password") {
@@ -60,19 +60,19 @@ class textfield extends StatelessWidget {
   }
 }
 
-class buttons extends StatelessWidget {
+class Buttons extends StatelessWidget {
   late final String label;
   late final String navigation;
   final GlobalKey<FormState> formKey;
-  TextEditingController? Econtroller;
-  TextEditingController? Pcontroller;
+  TextEditingController? eController;
+  TextEditingController? pController;
 
-  buttons(
+  Buttons(
       {super.key, required this.label,
       required this.navigation,
       required this.formKey,
-      this.Econtroller,
-      this.Pcontroller});
+      this.eController,
+      this.pController});
 
   @override
   Widget build(BuildContext context) {
@@ -84,12 +84,12 @@ class buttons extends StatelessWidget {
               label == "Create Account") {
          //   FirebaseFirestore.instance.disableNetwork();
          //   FirebaseFirestore.instance.enableNetwork();
-            Fire_base().signup(Econtroller!, Pcontroller!);
+            Fire_base().signup(eController!, pController!);
 
 
           } else if (label == "Sign-In") {
            // debugPrint("Sign-In");
-            Fire_base().singIn(Econtroller!, Pcontroller!);
+            Fire_base().singIn(eController!, pController!);
             /*ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Successfully signed in')),
             );*/
@@ -125,10 +125,10 @@ class buttons extends StatelessWidget {
   }
 }
 
-class view_design extends StatelessWidget {
+class ViewDesign extends StatelessWidget {
   final String label;
   final int height;
-  const view_design({super.key,
+  const ViewDesign({super.key,
     required this.label,
     required this.height,
   });
@@ -144,8 +144,8 @@ class view_design extends StatelessWidget {
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
               colors: [
-                GradientColorManager.g1_color,
-                GradientColorManager.g2_color
+                GradientColorManager.g1Color,
+                GradientColorManager.g2Color
               ]),
           borderRadius: BorderRadius.only(
                   bottomRight: const Radius.circular(30).w,
@@ -156,7 +156,7 @@ class view_design extends StatelessWidget {
           child: Text(
             label,
             style:
-                getTextStyle(33.sp, "Orbitron", GradientColorManager.g3_color),
+                getTextStyle(33.sp, "Orbitron", GradientColorManager.g3Color),
           ),
         ),
       ),

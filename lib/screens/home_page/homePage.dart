@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
   final pages = [
     const Page1(),
    // const Page2(),
-    loyal_card(),
+    LoyalCard(),
   ];
 
   @override
@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                       Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
                             builder: (BuildContext context) {
-                              return const login_page();
+                              return const LoginPage();
                             },
                           )));
                 },
@@ -113,7 +113,7 @@ class _HomePageState extends State<HomePage> {
           radius: 25.r,
           backgroundColor: ColorManager.green,
           child: Image.asset(
-            IconAssets.chat_icon,
+            IconAssets.chatIcon,
             fit: BoxFit.cover,
             height: 50.h,
           ),
@@ -226,26 +226,26 @@ class _HomePageState extends State<HomePage> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  card(
+                                  UserCardList(
                                       label: "Offers",
                                       icon: Icon(
                                         Icons.local_offer_sharp,
                                         color: ColorManager.green,
                                       )),
-                                  card(
+                                  UserCardList(
                                       label: "Notification",
                                       icon: Icon(
                                         Icons
                                             .notification_important_outlined,
                                         color: ColorManager.green,
                                       )),
-                                  card(
+                                  UserCardList(
                                       label: "Coupons and Promos",
                                       icon: Icon(
                                         Icons.card_giftcard_sharp,
                                         color: ColorManager.green,
                                       )),
-                                  card(
+                                  UserCardList(
                                     label: "Loyalty Cards",
                                     icon: Icon(
                                       Icons.credit_card,
@@ -253,32 +253,32 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     navigation: "loyal_card",
                                   ),
-                                  card(
+                                  UserCardList(
                                       label: "Purchases",
                                       icon: Icon(
                                         Icons.shopping_bag,
                                         color: ColorManager.green,
                                       )),
-                                  card(
+                                  UserCardList(
                                       label: "Shopping Tips",
                                       icon: Icon(
                                         Icons.bookmark_add_rounded,
                                         color: ColorManager.green,
                                       )),
-                                  card(
+                                  UserCardList(
                                       label: "Reports",
                                       icon: Icon(
                                         Icons.report,
                                         color: ColorManager.green,
                                       )),
-                                  card(
+                                  UserCardList(
                                       label:
                                           "Vendor Accounts & credentials",
                                       icon: Icon(
                                         Icons.account_circle_sharp,
                                         color: ColorManager.green,
                                       )),
-                                  card(
+                                  UserCardList(
                                       label: "Chat",
                                       icon: Icon(
                                         Icons.chat,

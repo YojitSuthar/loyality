@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:assign_1/screens/reuseWidget/reuse_widget.dart';
 
-class login_page extends StatefulWidget {
+class LoginPage extends StatefulWidget {
   static String id="login_page";
 
-  const login_page({super.key});
+  const LoginPage({super.key});
   @override
-  State<login_page> createState() => _login_pageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _login_pageState extends State<login_page> {
+class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController email_controller = TextEditingController();
-  TextEditingController pass_controller = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class _login_pageState extends State<login_page> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const view_design(label: "Zignuts Technolab",height: 330),
+            const ViewDesign(label: "Zignuts Technolab",height: 330),
             SizedBox(
               height: 10.h,
             ),
@@ -29,20 +29,20 @@ class _login_pageState extends State<login_page> {
                 key: _formKey,
                 child: Column(
                   children: [
-                    textfield(
-                        label: "E-mail", icon: Icons.email, disabled: false,Tcontroller: email_controller),
-                    textfield(
-                        label: "Password", icon: Icons.lock, disabled: true,Tcontroller: pass_controller),
-                    buttons(
+                    UserTextField(
+                        label: "E-mail", icon: Icons.email, disabled: false,tController: emailController),
+                    UserTextField(
+                        label: "Password", icon: Icons.lock, disabled: true,tController: passController),
+                    Buttons(
                       label: "Sign-In",
                       navigation: "home-page",
                       formKey: _formKey,
-                      Econtroller: email_controller,
-                      Pcontroller: pass_controller,
+                      eController: emailController,
+                      pController: passController,
                     ),
                   ],
                 )),
-            buttons(
+            Buttons(
               label: "Sign-up",
               navigation: "Signup",
               formKey: _formKey,

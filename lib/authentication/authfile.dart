@@ -27,7 +27,7 @@ class Fire_base {
   Future forget_password(TextEditingController email1) async {
       await FirebaseAuth.instance
           .sendPasswordResetEmail(email: email1.text.trim())
-          .then((value) => navigatorkey.currentState!.pop( login_page.id));
+          .then((value) => navigatorkey.currentState!.pop( LoginPage.id));
 
   }
 }

@@ -11,12 +11,14 @@ enum MenuOptions {
   item1,
   item2,
 }
-class loyal_card extends StatefulWidget {
+class LoyalCard extends StatefulWidget {
+  const LoyalCard({super.key});
+
   @override
-  State<loyal_card> createState() => _loyal_cardState();
+  State<LoyalCard> createState() => _LoyalCardState();
 }
 
-class _loyal_cardState extends State<loyal_card> {
+class _LoyalCardState extends State<LoyalCard> {
 
   Loyalcard cardMainData=Loyalcard();
   LoyaltyCardListModel? model;
@@ -129,7 +131,7 @@ class _loyal_cardState extends State<loyal_card> {
                           height: 23.h,
                           child: Image.asset(
                             //image of location icon
-                            IconAssets.location_icon,
+                            IconAssets.locationIcon,
                           ),
                         ),
                         SizedBox(
@@ -193,11 +195,11 @@ class _loyal_cardState extends State<loyal_card> {
                                           }
                                         },
                                         itemBuilder: (BuildContext context) =>[
-                                          PopupMenuItem(child: Text('Edit',style: TextStyle(color: Colors.green),),value: MenuOptions.item1,),
-                                          PopupMenuDivider(height: 1,),
-                                          PopupMenuItem(
-                                            child:  Text("Delete",style: TextStyle(color: Colors.lightGreen),),
+                                          const PopupMenuItem(value: MenuOptions.item1,child: Text('Edit',style: TextStyle(color: Colors.green),),),
+                                          const PopupMenuDivider(height: 1,),
+                                          const PopupMenuItem(
                                             value: MenuOptions.item2,
+                                            child:  Text("Delete",style: TextStyle(color: Colors.lightGreen),),
                                           ),
                                         ],
                                       )
@@ -205,7 +207,7 @@ class _loyal_cardState extends State<loyal_card> {
                                   ),
                                    CircleAvatar(
                                     radius: 30,
-                                    child: Text(model?.list![index].programName![0].toUpperCase()??'d',style: TextStyle(fontSize: 50),),
+                                    child: Text(model?.list![index].programName![0].toUpperCase()??'d',style: const TextStyle(fontSize: 50),),
                                   )
                                 ],
                               ),

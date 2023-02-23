@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:assign_1/resources/resources.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-class card extends StatefulWidget {
+class UserCardList extends StatefulWidget {
   final String label;
   final Icon icon;
   final String? navigation;
   final int? index;
-  card({required this.label, required this.icon,this.navigation,this.index});
+  UserCardList({required this.label, required this.icon,this.navigation,this.index});
 
   @override
-  State<card> createState() => _cardState();
+  State<UserCardList> createState() => _UserCardListState();
 }
 
-class _cardState extends State<card> {
+class _UserCardListState extends State<UserCardList> {
   @override
   Widget build(BuildContext context) {
     return Card(

@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:assign_1/screens/reuseWidget/reuse_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class signup extends StatelessWidget {
+class SignUp extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
 
-  TextEditingController name_controller = TextEditingController();
-  TextEditingController username_controller = TextEditingController();
-  TextEditingController email_controller = TextEditingController();
-  TextEditingController pass_controller = TextEditingController();
-  TextEditingController confirmpass_controller = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passController = TextEditingController();
+  TextEditingController confirmPassController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class signup extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const view_design(
+            const ViewDesign(
               label: "Create Account",
               height: 200,
             ),
@@ -29,29 +29,29 @@ class signup extends StatelessWidget {
                 key: _formKey,
                 child: Column(
                   children: [
-                    textfield(label: "Name", icon: Icons.abc, disabled: false,Tcontroller: name_controller),
-                    textfield(
+                    UserTextField(label: "Name", icon: Icons.abc, disabled: false,tController: nameController),
+                    UserTextField(
                         label: "User-Name",
                         icon: Icons.account_circle_sharp,
-                        disabled: false,Tcontroller: username_controller),
-                    textfield(
-                        label: "E-mail", icon: Icons.email, disabled: false,Tcontroller: email_controller),
-                    textfield(
+                        disabled: false,tController: usernameController),
+                    UserTextField(
+                        label: "E-mail", icon: Icons.email, disabled: false,tController: emailController),
+                    UserTextField(
                         label: "Password",
                         icon: Icons.remove_red_eye_outlined,
-                        disabled: true,Tcontroller: pass_controller),
-                    textfield(
+                        disabled: true,tController: passController),
+                    UserTextField(
                         label: "Confirm-Password",
                         icon: Icons.remove_red_eye_outlined,
-                        disabled: true,Tcontroller: confirmpass_controller),
+                        disabled: true,tController: confirmPassController),
                   ],
                 )),
-            buttons(
+            Buttons(
               label: "Create Account",
               navigation: "home-page",
               formKey: _formKey,
-              Econtroller: email_controller,
-              Pcontroller: pass_controller,
+              eController: emailController,
+              pController: passController,
             ),
           ],
         ),

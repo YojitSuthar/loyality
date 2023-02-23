@@ -14,7 +14,7 @@ class ForgetPass extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          const view_design(
+          const ViewDesign(
             label: "Forget Password",
             height: 200,
           ),
@@ -25,16 +25,16 @@ class ForgetPass extends StatelessWidget {
             key: _formKey,
             child: Column(
               children: [
-                textfield(
+                UserTextField(
                     label: "E-mail",
                     icon: Icons.email,
                     disabled: false,
-                    Tcontroller: forgetPass),
-                buttons(
+                    tController: forgetPass),
+                Buttons(
                   label: "Reset-password",
                   navigation: "null",
                   formKey: _formKey,
-                  Econtroller: forgetPass,
+                  eController: forgetPass,
                 )
               ],
             ),

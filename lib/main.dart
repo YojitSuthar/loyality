@@ -26,14 +26,14 @@ class myApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           initialRoute: "splash",
           routes: {
-            "splash":(context) => splash_screen(),
-            login_page.id:(context)=> login_page(),
-            "Signup":(context)=> signup(),
+            "splash":(context) => SplashScreen(),
+            LoginPage.id:(context)=> LoginPage(),
+            "Signup":(context)=> SignUp(),
             HomePage.id:(context) =>HomePage(),
             "forgetPass":(context) =>ForgetPass(),
-            "loyal_card":(context) =>loyal_card(),
+            "loyal_card":(context) =>LoyalCard(),
             "userDataField":(context)=>UserDataField(label: "New Card",value: "Save"),
-            "EdituserDataField":(context)=>UserDataField(label: "Edit Card",value: "Update"),
+          "EdituserDataField":(context)=>UserDataField(label: "Edit Card",value: "Update"),
 
           },
         );

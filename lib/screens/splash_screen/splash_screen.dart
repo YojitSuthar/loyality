@@ -5,14 +5,14 @@ import 'package:assign_1/resources/resources.dart';
 import '../home_page/homePage.dart';
 import '../login_page/loginPage.dart';
 
-class splash_screen extends StatefulWidget {
-  const splash_screen({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
   @override
-  State<splash_screen> createState() => _splash_screenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _splash_screenState extends State<splash_screen> {
+class _SplashScreenState extends State<SplashScreen> {
   FirebaseAuth auth = FirebaseAuth.instance;
   User? get user => auth.currentUser;
 
@@ -20,10 +20,10 @@ class _splash_screenState extends State<splash_screen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Navigate_Login();
+    navigateLogin();
   }
 
-  void Navigate_Login() async {
+  void navigateLogin() async {
     Duration time = const Duration(seconds: 3);
     await Future.delayed(time, () {});
     if (user != null) {
@@ -35,7 +35,7 @@ class _splash_screenState extends State<splash_screen> {
     } else {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (BuildContext context) {
-          return const login_page();
+          return const LoginPage();
         },
       ));
     }
@@ -53,14 +53,14 @@ class _splash_screenState extends State<splash_screen> {
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
                   colors: [
-                GradientColorManager.g1_color,
-                GradientColorManager.g2_color
+                GradientColorManager.g1Color,
+                GradientColorManager.g2Color
               ])),
           child: Center(
               child: Text(
             "Zignuts Technolab",
             style:
-                getTextStyle(33.sp, "Orbitron", GradientColorManager.g3_color),
+                getTextStyle(33.sp, "Orbitron", GradientColorManager.g3Color),
           )),
         ),
       ),
