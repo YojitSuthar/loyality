@@ -34,6 +34,7 @@ class myApp extends StatelessWidget {
             "loyal_card":(context) =>loyal_card(),
             "userDataField":(context)=>UserDataField(label: "New Card",value: "Save"),
             "EdituserDataField":(context)=>UserDataField(label: "Edit Card",value: "Update"),
+
           },
         );
       },

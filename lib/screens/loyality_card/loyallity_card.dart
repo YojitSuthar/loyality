@@ -14,53 +14,40 @@ class loyal_card extends StatefulWidget {
 
 class _loyal_cardState extends State<loyal_card> {
 
- // Loyalcard cardMainData=Loyalcard();
+  Loyalcard cardMainData=Loyalcard();
   LoyaltyCardListModel? model;
-
+  var currentUser=FirebaseAuth.instance.currentUser?.email;
 
   @override
   void initState() {
-    super.initState();
     getLoyaltyCardData();
+    super.initState();
   }
 
   Future<void> getLoyaltyCardData() async {
-    var currentUser=FirebaseAuth.instance.currentUser?.email;
-    await FirebaseFirestore.instance.collection(currentUser!).get().then((QuerySnapshot carddata){
 
-    //  final modelData=Loyalcard.fromJson(carddata)
+    await FirebaseFirestore.instance.collection(currentUser!).get().then((QuerySnapshot carddata){
 
       Map<String,dynamic> maindata={};
       List<Map<String, dynamic>>? list = [];
 
       list = carddata.docs.map((doc) => doc.data() ).cast<Map<String, dynamic>>().toList();
-      print(list[0]['programName']);
       maindata.addAll({"list": list});
-      //model= LoyaltyCardListModel.fromJson(maindata);
       setState(() {
         model= LoyaltyCardListModel.fromJson(maindata);
       });
-       print(model?.list?[1].url);
-     //  cardd=model;
 
-      //print(list);
-   /*    carddata.docs.toList();
-     //  print(carddata.docs.first.data().toString());
-       List<Map<dynamic, dynamic>> list = [];
-
-       carddata.docs.forEach((element) {
-         list.add(element.data());
-   *//* print(element.data().toString());
-});*/
-     //  var model= LoyaltyCardModel.fromJson(carddata.docs.first);
-      // print(model.url);
-
-      //debugPrint(carddata.toString());
-
-
-      // list = snapshot.docs.map((doc) => doc.data() ).toList();
     });
   }
+
+  Future<void> removeCard(String index) async {
+    print(index);
+    setState(() async {
+      await FirebaseFirestore.instance.collection(currentUser!).doc(index).delete().then((value) => debugPrint("done"));
+    });
+
+
+ }
 
 
   @override
@@ -171,11 +158,11 @@ class _loyal_cardState extends State<loyal_card> {
                 // implement GridView.builder
                 child: GridView.builder(
                     gridDelegate:
-                        const SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent: 200,
-                            childAspectRatio: 6 / 5,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10),
+                    const SliverGridDelegateWithMaxCrossAxisExtent(
+                        maxCrossAxisExtent: 200,
+                        childAspectRatio: 6 / 5,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10),
                     itemCount: model?.list?.length, //cardd.list?.length,
                     itemBuilder: (BuildContext ctx, index) {
                       return Column(
@@ -193,7 +180,7 @@ class _loyal_cardState extends State<loyal_card> {
                                           icon: Icon(Icons.more_vert),
                                           // Callback that sets the selected popup menu item.
                                           itemBuilder: (BuildContext context) =>
-                                              <PopupMenuEntry>[
+                                          <PopupMenuEntry>[
                                             PopupMenuItem(
                                               child: TextButton(
                                                   onPressed: () {
@@ -204,7 +191,9 @@ class _loyal_cardState extends State<loyal_card> {
                                             ),
                                             PopupMenuItem(
                                               child: TextButton(
-                                                  onPressed: () {},
+                                                  onPressed: () {
+                                                    removeCard(model?.list![index].id??'');
+                                                  },
                                                   child: Text("Delete")),
                                             ),
                                           ],
@@ -221,7 +210,7 @@ class _loyal_cardState extends State<loyal_card> {
                             ),
                           ),
                           Text(model?.list![index].programName??'d'),
-                        //  Text(cardMainData[index].programName),
+                          //  Text(cardMainData[index].programName),
                         ],
                       );
                     }),

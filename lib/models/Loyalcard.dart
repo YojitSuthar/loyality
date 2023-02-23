@@ -11,15 +11,15 @@ class Loyalcard {
   String? notes;
   String? vendorList;
 
-  Loyalcard({
+  Loyalcard(  {
     this.id='',
-    required this.frontCardImg,
-    required this.backCardImg,
-    required this.cardNumber,
-    required this.programName,
-    required this.url,
-    required this.notes,
-    required this.vendorList
+     this.frontCardImg,
+     this.backCardImg,
+     this.cardNumber,
+     this.programName,
+     this.url,
+     this.notes,
+     this.vendorList
   });
 
   Loyalcard.fromJson(Map<String, dynamic> json) {

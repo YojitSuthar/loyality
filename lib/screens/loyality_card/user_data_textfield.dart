@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:assign_1/resources/resources.dart';
-import '../../models/Loyalcard.dart';
 import 'loyallity_card.dart';
 
 class UserDataField extends StatefulWidget {
@@ -23,10 +22,25 @@ class UserDataTextFieldState extends State<UserDataField> {
   var db=FirebaseFirestore.instance.collection(FirebaseAuth.instance.currentUser!.email!);
 
   TextEditingController cardController = TextEditingController();
+
   TextEditingController vendorController = TextEditingController();
+
   TextEditingController programController = TextEditingController();
+
   TextEditingController websiteController = TextEditingController();
+
   TextEditingController notesController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+
+    final args=(ModalRoute.of(context)?.settings.arguments ?? <String,dynamic>{}) as Map;
+
+    print(args['index']);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -73,11 +87,11 @@ class UserDataTextFieldState extends State<UserDataField> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        child: const Text(
-                            "Scan your card barcode or QR code and enter the following info as you prefer to link it to your card"),
                         padding: const EdgeInsets.only(
                             top: 40, bottom: 40, left: 45, right: 45)
                             .w,
+                        child: const Text(
+                            "Scan your card barcode or QR code and enter the following info as you prefer to link it to your card"),
                       ),
                       const Icon(
                         Icons.qr_code_2,
@@ -119,23 +133,15 @@ class UserDataTextFieldState extends State<UserDataField> {
                     height: 5,
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10),
-                    margin: const EdgeInsets.only(left: 15,right: 15),
+                      padding: const EdgeInsets.all(10),
+                      margin: const EdgeInsets.only(left: 15,right: 15),
                       child:
-                          ElevatedButton(style: ElevatedButton.styleFrom(
-                            primary: Colors.green,
-                            padding: const EdgeInsets.all(20),
-                          ),onPressed: () {
-
-                           // if(widget.value.contains("Save"))
-                              createUser();
-                         /*   else
-                              updateDataFirestore();*/
-
-
-
-
-                          }, child: Text(widget.value)))
+                      ElevatedButton(style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green,
+                        padding: const EdgeInsets.all(20),
+                      ),onPressed: () {
+                        addDataFirestore();
+                      }, child: Text(widget.value)))
                 ],
               ),
             ),
@@ -145,71 +151,7 @@ class UserDataTextFieldState extends State<UserDataField> {
     );
   }
 
-  Future createUser() async{
-
-      Loyalcard user=Loyalcard(
-          id: '',
-          frontCardImg   : "",
-          backCardImg: "",
-          cardNumber: cardController.text,
-          programName: programController.text,
-          url: websiteController.text,
-          notes  : notesController.text,
-          vendorList : "Visa"
-      );
-
-
-      final json=user.toJson();
-      await db.add(json).then((value) => db.doc(value.id).update({"id":value.id}).whenComplete(() => Navigator.pop(context)));
-  }
-
-  Future<void> addDataFirestore()  async {
-
-    final _loyaltycard = {
-      "id":'',
-      "frontCardImg": "",
-      "backCardImg": "",
-      "cardNumber": cardController.text,
-      "programName": programController.text,
-      "url": websiteController.text,
-      "notes": notesController.text,
-      "vendorList": "Visa",
-    };
-
-
-/*
-    db.add(_loyaltycard).then((value) {
-      db.doc(value.id).update({"id":value.id});
-    });*/
-
-   //var loyalModel= LoyaltyCardModel.fromJson(json);
-
-    List<LoyaltyCardModel> listdata=[];
-
-    Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=> loyal_card()));
-
- /*   db.get().then((value) {
-      listdata.clear();
-      listdata= value.docs.map((e) => LoyaltyCardModel.fromJson(e as Map<String, dynamic>)).toList();
-    //  listdata.addAll(value as Iterable<LoyaltyCardModel>);
-    //  LoyaltyCardModel data=LoyaltyCardModel.fromJson(value) ;
-   //   print(listdata[0].url);
-      print(listdata[0].url);
-    });*/
-
-    //
-    //  FirebaseFirestore.instance.collection(FirebaseAuth.instance.currentUser!.email!).doc().get().then((DocumentSnapshot snap) async{
-
-        //print(snap.data().toString());
-    //   }
-    // });
-
-
-
-
-  }
-
-  /*Future<void> updateDataFirestore()  async {
+  Future<void> addDataFirestore() async {
 
     final _loyaltycard = {
       "id":"",
@@ -222,26 +164,22 @@ class UserDataTextFieldState extends State<UserDataField> {
       "vendorList": "Visa",
     };
 
-
-
-    db.doc().then((value) {
+    db.add(_loyaltycard).then((value) {
       db.doc(value.id).update({"id":value.id});
     });
 
     //var loyalModel= LoyaltyCardModel.fromJson(json);
 
-    List<LoyaltyCardModel> listdata=[];
-
     Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=> loyal_card()));
 
-    *//*   db.get().then((value) {
+    /*   db.get().then((value) {
       listdata.clear();
       listdata= value.docs.map((e) => LoyaltyCardModel.fromJson(e as Map<String, dynamic>)).toList();
     //  listdata.addAll(value as Iterable<LoyaltyCardModel>);
     //  LoyaltyCardModel data=LoyaltyCardModel.fromJson(value) ;
    //   print(listdata[0].url);
       print(listdata[0].url);
-    });*//*
+    });*/
 
     //
     //  FirebaseFirestore.instance.collection(FirebaseAuth.instance.currentUser!.email!).doc().get().then((DocumentSnapshot snap) async{
@@ -253,7 +191,7 @@ class UserDataTextFieldState extends State<UserDataField> {
 
 
 
-  }*/
+  }
 
 }
 
@@ -275,7 +213,7 @@ class CardFromField extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         decoration:
-            InputDecoration(hintText: label, border: InputBorder.none),
+        InputDecoration(hintText: label, border: InputBorder.none),
       ),
     );
   }
@@ -285,7 +223,7 @@ class card extends StatelessWidget {
   final String label;
   final IconData icons;
 
-  card({required this.label, required this.icons});
+  card({super.key, required this.label, required this.icons});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -303,9 +241,9 @@ class card extends StatelessWidget {
             width: 124,
             child: Center(
                 child: Icon(
-              icons,
-              size: 50,
-            )),
+                  icons,
+                  size: 50,
+                )),
           ),
         ),
         const SizedBox(height: 10),
