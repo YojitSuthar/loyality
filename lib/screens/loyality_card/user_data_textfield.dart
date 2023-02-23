@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:assign_1/resources/resources.dart';
-
 import 'loyallity_card.dart';
 
 class UserDataField extends StatefulWidget {
-  const UserDataField({super.key});
+  String label;
+  String value;
+  UserDataField({required this.label,required this.value});
+
 
   @override
   State<UserDataField> createState() => UserDataTextFieldState();
@@ -29,9 +31,7 @@ class UserDataTextFieldState extends State<UserDataField> {
 
   TextEditingController notesController = TextEditingController();
 
-   String label;
-   String value;
-  UserDataField({ required this.label,required this.value});
+
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class UserDataTextFieldState extends State<UserDataField> {
                           width: 10.w,
                         ),
                         Text(
-                          label,
+                          widget.label,
                           style: TextStyle(
                               fontSize: 20.sp, fontWeight: FontWeight.w500),
                         )
@@ -136,7 +136,7 @@ class UserDataTextFieldState extends State<UserDataField> {
 
 
 
-                          }, child: const Text("Save")))
+                          }, child: Text(widget.value)))
                 ],
               ),
             ),

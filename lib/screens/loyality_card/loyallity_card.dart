@@ -83,9 +83,11 @@ class _loyal_cardState extends State<loyal_card> {
                         margin: const EdgeInsets.only(left: 5).r,
                         child: Row(
                           children: [
-                            Icon(
-                              Icons.arrow_back,
-                              size: 30,
+                            IconButton(
+                              icon: const Icon(
+                                Icons.arrow_back,
+                                size: 30,
+                              ), onPressed: () { Navigator.pop(context);},
                             ),
                             SizedBox(
                               width: 10.w,
@@ -193,7 +195,7 @@ class _loyal_cardState extends State<loyal_card> {
                                               child: TextButton(
                                                   onPressed: () {
                                                     Navigator.pushNamed(
-                                                        context, "userDataField");
+                                                        context, "EdituserDataField");
                                                   },
                                                   child: Text("Edit")),
                                             ),

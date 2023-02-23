@@ -27,7 +27,6 @@ class _HomePageState extends State<HomePage> {
     const Page1(),
    // const Page2(),
     loyal_card(),
-    const Page2(),
   ];
 
   @override
