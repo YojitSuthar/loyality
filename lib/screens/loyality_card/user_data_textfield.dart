@@ -251,21 +251,6 @@ class UserDataTextFieldState extends State<UserDataField> {
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => LoyalCard()));
 
-    /*   db.get().then((value) {
-      listdata.clear();
-      listdata= value.docs.map((e) => LoyaltyCardModel.fromJson(e as Map<String, dynamic>)).toList();
-    //  listdata.addAll(value as Iterable<LoyaltyCardModel>);
-    //  LoyaltyCardModel data=LoyaltyCardModel.fromJson(value) ;
-   //   print(listdata[0].url);
-      print(listdata[0].url);
-    });*/
-
-    //
-    //  FirebaseFirestore.instance.collection(FirebaseAuth.instance.currentUser!.email!).doc().get().then((DocumentSnapshot snap) async{
-
-    //print(snap.data().toString());
-    //   }
-    // });
   }
 }
 

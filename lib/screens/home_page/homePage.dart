@@ -317,7 +317,8 @@ class _HomePageState extends State<HomePage> {
         final newUser = <String, dynamic>{
           "Email": currentUser!
         };
-        dbUser.doc(currentUser).set(newUser);
+        dbUser.add(newUser);
+       // dbUser.doc(currentUser).set(newUser);
         print(newUser.toString());
       }
     });

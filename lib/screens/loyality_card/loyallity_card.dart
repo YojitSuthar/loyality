@@ -42,7 +42,6 @@ class _LoyalCardState extends State<LoyalCard> {
       setState(() {
         model= LoyaltyCardListModel.fromJson(maindata);
       });
-
     });
   }
 
@@ -207,7 +206,7 @@ class _LoyalCardState extends State<LoyalCard> {
                                   ),
                                    CircleAvatar(
                                     radius: 30,
-                                    child: Text(model?.list![index].programName![0].toUpperCase()??'d',style: const TextStyle(fontSize: 50),),
+                                    child: Text(model?.list![index].programName![0].toUpperCase()??'Program Name',style: const TextStyle(fontSize: 50),),
                                   )
                                 ],
                               ),
