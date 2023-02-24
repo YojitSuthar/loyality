@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:assign_1/resources/resources.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-class UserCardList extends StatefulWidget {
+class UserCardList extends StatelessWidget {
   final String label;
   final Icon icon;
   final String? navigation;
@@ -9,18 +9,15 @@ class UserCardList extends StatefulWidget {
   UserCardList({required this.label, required this.icon,this.navigation,this.index});
 
   @override
-  State<UserCardList> createState() => _UserCardListState();
-}
-
-class _UserCardListState extends State<UserCardList> {
-  @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        leading: widget.icon,
-        title: Text(widget.label,style: new_1TextStyle(18.sp, FontWeightManager.semiBold),),
+        leading: icon,
+        title: Text(label,style: new_1TextStyle(18.sp, FontWeightManager.semiBold),),
         onTap:(){
-          Navigator.popAndPushNamed(context, 'loyal_card');
+          if (navigation=='loyal_card'){
+            Navigator.popAndPushNamed(context, 'loyal_card');
+          }
         },
       ),
     );

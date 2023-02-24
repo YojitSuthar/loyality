@@ -21,7 +21,7 @@ class LoyalCard extends StatefulWidget {
 }
 
 class _LoyalCardState extends State<LoyalCard> {
-
+  bool _showCircle = true;
   Loyalcard cardMainData=Loyalcard();
   LoyaltyCardListModel? model;
   var currentUser=FirebaseAuth.instance.currentUser?.email;
@@ -29,7 +29,9 @@ class _LoyalCardState extends State<LoyalCard> {
   @override
   void initState() {
     super.initState();
-    getLoyaltyCardData();
+
+     getLoyaltyCardData();
+
   }
 
   Future<void> getLoyaltyCardData() async {
@@ -43,6 +45,8 @@ class _LoyalCardState extends State<LoyalCard> {
       maindata.addAll({"list": list});
       setState(() {
         model= LoyaltyCardListModel.fromJson(maindata);
+        _showCircle = !_showCircle;
+
       });
     });
   }
@@ -50,9 +54,21 @@ class _LoyalCardState extends State<LoyalCard> {
   Future<void> removeCard(String index) async {
       await FirebaseFirestore.instance.collection(currentUser!).doc(index).delete().then((value) => debugPrint("done"));
  }
+  Widget addButton() {
+    return GestureDetector(
+      onTap: (){},
+      child: const Icon(
+        Icons.add_circle,
+        size: 45,
+        color: Colors.black,
+      ),
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -156,70 +172,12 @@ class _LoyalCardState extends State<LoyalCard> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(10),
-                // implement GridView.builder
-                child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent: 200,
-                            childAspectRatio: 6 / 5,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10),
-                    itemCount: model?.list?.length, //cardd.list?.length,
-                    itemBuilder: (BuildContext ctx, index) {
-                      return Column(
-                        children: [
-                          Expanded(
-                            child: Card(
-                              color: Colors.green[500],
-                              child: Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      PopupMenuButton<MenuOptions>(
-                                        icon: const Icon(Icons.more_vert),
-                                        position: PopupMenuPosition.under,
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                                        // constraints: BoxConstraints.expand(width: 150),
-                                        onSelected: (MenuOption){
-                                          if(MenuOption==MenuOptions.item1){
-                                            final id=model?.list![index].id??'id';
-                                            Route route = MaterialPageRoute(builder: (context) => UserDataField(label: "Edit Card",value: "Update",id: id));
-                                            Navigator.push(context, route).then(onGoBack);
-                                          } else if(MenuOption==MenuOptions.item2){
-                                            setState(() {
-                                              removeCard(model?.list![index].id??'');
-                                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoyalCard())).then((value) => onGoBack);
-                                            });
-                                          }
-                                        },
-                                        itemBuilder: (BuildContext context) =>[
-                                          const PopupMenuItem(value: MenuOptions.item1,child: Text('Edit',style: TextStyle(color: Colors.green),),),
-                                          const PopupMenuDivider(height: 1,),
-                                          const PopupMenuItem(
-                                            value: MenuOptions.item2,
-
-                                            child:  Text("Delete",style: TextStyle(color: Colors.lightGreen),),
-                                          ),
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                   CircleAvatar(
-                                    radius: 30,
-                                    child: Text(model?.list![index].programName![0].toUpperCase()??'Program Name',style: const TextStyle(fontSize: 50),),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                          Text(model?.list![index].programName??'d'),
-                        //  Text(cardMainData[index].programName),
-                        ],
-                      );
-                    }),
+                child: (!_showCircle)? showGridView(): Text("Nothing is here"),
               ),
             ),
+
+            _showCircle ? CircularProgressIndicator() : CircularProgressIndicator(value: 0.0),
+
           ],
         ),
       ),
@@ -237,8 +195,73 @@ class _LoyalCardState extends State<LoyalCard> {
 
   FutureOr onGoBack(dynamic value) {
     setState(() {
+      _showCircle = !_showCircle;
         getLoyaltyCardData();
     });
+  }
+
+  showGridView() {
+    return GridView.builder(
+        gridDelegate:
+        const SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 200,
+            childAspectRatio: 6 / 5,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10),
+        itemCount: model?.list?.length, //cardd.list?.length,
+        itemBuilder: (BuildContext ctx, index) {
+          return Column(
+            children: [
+              Expanded(
+                child: Card(
+                  color: Colors.green[500],
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          PopupMenuButton<MenuOptions>(
+                            icon: const Icon(Icons.more_vert),
+                            position: PopupMenuPosition.under,
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                            // constraints: BoxConstraints.expand(width: 150),
+                            onSelected: (MenuOption){
+                              if(MenuOption==MenuOptions.item1){
+                                final id=model?.list![index].id??'id';
+                                Route route = MaterialPageRoute(builder: (context) => UserDataField(label: "Edit Card",value: "Update",id: id));
+                                Navigator.push(context, route).then(onGoBack);
+                              } else if(MenuOption==MenuOptions.item2){
+                                setState(() {
+                                  removeCard(model?.list![index].id??'');
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoyalCard())).then((value) => onGoBack);
+                                });
+                              }
+                            },
+                            itemBuilder: (BuildContext context) =>[
+                              const PopupMenuItem(value: MenuOptions.item1,child: Text('Edit',style: TextStyle(color: Colors.green),),),
+                              const PopupMenuDivider(height: 1,),
+                              const PopupMenuItem(
+                                value: MenuOptions.item2,
+
+                                child:  Text("Delete",style: TextStyle(color: Colors.lightGreen),),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                      CircleAvatar(
+                        radius: 30,
+                        child: Text(model?.list![index].programName![0].toUpperCase()??'Program Name',style: const TextStyle(fontSize: 50),),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              Text(model?.list![index].programName??'d'),
+              //  Text(cardMainData[index].programName),
+            ],
+          );
+        });
   }
 }
 
