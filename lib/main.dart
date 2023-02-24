@@ -1,5 +1,5 @@
 import 'package:assign_1/screens/Forget_password/forget_password.dart';
-import 'package:assign_1/screens/home_page/homePage.dart';
+import 'package:assign_1/screens/home_page/home_screen.dart';
 import 'package:assign_1/screens/login_page/loginPage.dart';
 import 'package:assign_1/screens/loyality_card/loyallity_card.dart';
 import 'package:assign_1/screens/loyality_card/user_data_textfield.dart';

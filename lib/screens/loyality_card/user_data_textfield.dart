@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:assign_1/resources/resources.dart';
-import 'loyallity_card.dart';
 
 class UserDataField extends StatefulWidget {
   String label;
@@ -165,7 +164,6 @@ class UserDataTextFieldState extends State<UserDataField> {
                         onChanged: (String? newValue) {
                           setState(() {
                             dropDownValue = newValue!;
-                            // widget.a=dropdownvalue;
                           });
                         },
                       ))),
@@ -241,11 +239,6 @@ class UserDataTextFieldState extends State<UserDataField> {
     db.add(loyaltyCard).then((value) {
       db.doc(value.id).update({"id": value.id});
     });
-
-    //var loyalModel= LoyaltyCardModel.fromJson(json);
-
-    List<LoyaltyCardModel> listdata = [];
-
     Navigator.pop(context);
   }
 }

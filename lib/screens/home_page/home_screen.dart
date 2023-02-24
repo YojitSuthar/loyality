@@ -25,7 +25,6 @@ class _HomePageState extends State<HomePage> {
 
   final pages = [
     const Page1(),
-   // const Page2(),
     LoyalCard(),
   ];
 
@@ -323,70 +322,6 @@ class _HomePageState extends State<HomePage> {
       }
     });
 
-    /*await dbUser.doc(currentUser).get().then((DocumentSnapshot snap) async{
-        if(snap.exists) {
-          print(snap['Email']);
-        }
-        else {
-          final newUser = <String, String>{
-            "EMail": currentUser!
-          };
-          dbUser.add(newUser);
-          print(newUser.toString());
-          snap['Email'];
-        }
-    });*/
-    //
-    // await dbUser.doc(currentUser).get().then((DocumentSnapshot snap) async{
-    //   if(snap.exists) {
-    //     print(snap['Email']);
-    //   }
-    // });
-    //Future<DocumentSnapshot<Map<String, dynamic>>> _collectionRef =    FirebaseFirestore.instance.collection(currentUser!).doc().get().then((DocumentSnapshot snap){
-     // if(snap!=null)
-    //  print(snap['program_name']);
-
-   // });
-
-      // Get docs from collection reference
-     // print(_collectionRef);
-     // QuerySnapshot querySnapshot = await _collectionRef.get();
-
-      // // Get data from docs and convert map to List
-      // final allData = querySnapshot.docs.map((doc) => doc.data()).toList();
-      //
-      // print(allData);
-    //  _getLoyaltyCard()
-
-        // else
-        //   print("Not found");
-
-
-
-
-
-  //  print(users.id);
-
-    // users.doc("Users/${user.email}").forEach((element){
-    //
-    // });
-
-   //  CollectionReference _collectionRef = FirebaseFirestore.instance.collection('Users');
-   //
-   //
-   //  QuerySnapshot querySnapshot = await _collectionRef.get();
-   //  final allData = querySnapshot.docs.map((doc) => doc.data());
-   //
-   // // print(allData);
-   //
-   //  allData.forEach((element){
-   //    //print("$element  Element");
-   //   // print("${user.email}  EMail");
-   //   // print(element!["Email"]==user.email  );
-   //  });
-   //
-
-    //print(temp);
   }
 }
 

@@ -29,9 +29,7 @@ class _LoyalCardState extends State<LoyalCard> {
   @override
   void initState() {
     super.initState();
-
      getLoyaltyCardData();
-
   }
 
   Future<void> getLoyaltyCardData() async {
@@ -64,7 +62,6 @@ class _LoyalCardState extends State<LoyalCard> {
       ),
     );
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -164,11 +161,6 @@ class _LoyalCardState extends State<LoyalCard> {
               ),
             ),
 
-            /*cardd.list?.length==0 ? Center(
-              child: CircularProgressIndicator(
-
-              ),
-            ):*/
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(10),
@@ -176,7 +168,7 @@ class _LoyalCardState extends State<LoyalCard> {
               ),
             ),
 
-            _showCircle ? CircularProgressIndicator() : CircularProgressIndicator(value: 0.0),
+            _showCircle ? const CircularProgressIndicator() : const CircularProgressIndicator(value: 0.0),
 
           ],
         ),

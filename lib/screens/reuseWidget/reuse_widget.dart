@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:assign_1/resources/resources.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../authentication/authfile.dart';
+import '../../main.dart';
+import '../home_page/home_screen.dart';
 
 class UserTextField extends StatelessWidget {
   final String label;
@@ -9,7 +12,8 @@ class UserTextField extends StatelessWidget {
   final bool disabled;
   final TextEditingController tController;
   const UserTextField(
-      {super.key, required this.label,
+      {super.key,
+      required this.label,
       required this.icon,
       required this.disabled,
       required this.tController});
@@ -68,7 +72,8 @@ class Buttons extends StatelessWidget {
   TextEditingController? pController;
 
   Buttons(
-      {super.key, required this.label,
+      {super.key,
+      required this.label,
       required this.navigation,
       required this.formKey,
       this.eController,
@@ -82,23 +87,20 @@ class Buttons extends StatelessWidget {
             Navigator.pushNamed(context, navigation);
           } else if (formKey.currentState!.validate() &&
               label == "Create Account") {
-         //   FirebaseFirestore.instance.disableNetwork();
-         //   FirebaseFirestore.instance.enableNetwork();
-            Fire_base().signup(eController!, pController!);
-
-
+            try {
+              await FirebaseAuth.instance
+                  .createUserWithEmailAndPassword(
+                      email: eController!.text.trim(),
+                      password: pController!.text.trim())
+                  .then((value) => navigatorkey.currentState!
+                      .pushReplacementNamed(HomePage.id));
+            } catch (e) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text("account already exists")));
+            }
           } else if (label == "Sign-In") {
-           // debugPrint("Sign-In");
-            Fire_base().singIn(eController!, pController!);
-            /*ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Successfully signed in')),
-            );*/
-          } /*else if (label == "Reset-password") {
-            Fire_base().forget_password(Econtroller!);
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Password reset')),
-            );
-          }*/ else {
+            FireBase().singIn(eController!, pController!);
+          } else {
             if (formKey.currentState!.validate()) {
               Navigator.pushNamed(context, navigation);
             }
@@ -128,7 +130,8 @@ class Buttons extends StatelessWidget {
 class ViewDesign extends StatelessWidget {
   final String label;
   final int height;
-  const ViewDesign({super.key,
+  const ViewDesign({
+    super.key,
     required this.label,
     required this.height,
   });
