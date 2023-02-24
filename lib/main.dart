@@ -13,6 +13,8 @@ import 'package:firebase_core/firebase_core.dart';
 final navigatorkey= GlobalKey<NavigatorState>();
 class myApp extends StatelessWidget {
 
+
+
   @override
   Widget build(BuildContext context) {
     //Set the fit size (Find your UI design, look at the dimensions of the device screen and fill it in,unit in dp)

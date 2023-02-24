@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:assign_1/models/_loyalti_card_model.dart';
 import 'package:assign_1/screens/loyality_card/user_data_textfield.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -46,10 +48,7 @@ class _LoyalCardState extends State<LoyalCard> {
   }
 
   Future<void> removeCard(String index) async {
-    print(index);
-    setState(() async {
       await FirebaseFirestore.instance.collection(currentUser!).doc(index).delete().then((value) => debugPrint("done"));
-    });
  }
 
   @override
@@ -185,11 +184,12 @@ class _LoyalCardState extends State<LoyalCard> {
                                         onSelected: (MenuOption){
                                           if(MenuOption==MenuOptions.item1){
                                             final id=model?.list![index].id??'id';
-                                            Navigator.pushNamed(context, "EdituserDataField");
-                                            Navigator.push(context, MaterialPageRoute(builder: (context) => UserDataField(id: id,value: "Update",label: "Edit",)));
+                                            Route route = MaterialPageRoute(builder: (context) => UserDataField(label: "Edit Card",value: "Update",id: id));
+                                            Navigator.push(context, route).then(onGoBack);
                                           } else if(MenuOption==MenuOptions.item2){
                                             setState(() {
                                               removeCard(model?.list![index].id??'');
+                                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoyalCard())).then((value) => onGoBack);
                                             });
                                           }
                                         },
@@ -198,6 +198,7 @@ class _LoyalCardState extends State<LoyalCard> {
                                           const PopupMenuDivider(height: 1,),
                                           const PopupMenuItem(
                                             value: MenuOptions.item2,
+
                                             child:  Text("Delete",style: TextStyle(color: Colors.lightGreen),),
                                           ),
                                         ],
@@ -225,13 +226,19 @@ class _LoyalCardState extends State<LoyalCard> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.green,
         onPressed: () {
-          Navigator.pushNamed(context, "userDataField");
+          Navigator.pushNamed(context, 'userDataField').then(onGoBack);
         },
         child: const Icon(
           Icons.add,
         ),
       ),
     );
+  }
+
+  FutureOr onGoBack(dynamic value) {
+    setState(() {
+        getLoyaltyCardData();
+    });
   }
 }
 

@@ -83,8 +83,8 @@ class UserDataTextFieldState extends State<UserDataField> {
                             size: 30,
                           ),
                           onPressed: () {
-                            Navigator.pushReplacementNamed(
-                                context, "loyal_card");
+                            Navigator.pop(
+                                context);
                           },
                         ),
                         SizedBox(
@@ -222,9 +222,7 @@ class UserDataTextFieldState extends State<UserDataField> {
     };
 
     db.doc(widget.id).update(loyaltyCard).then((value) {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => LoyalCard()));
-      print("yes");
+      Navigator.pop(context);
     });
   }
 
@@ -248,9 +246,7 @@ class UserDataTextFieldState extends State<UserDataField> {
 
     List<LoyaltyCardModel> listdata = [];
 
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => LoyalCard()));
-
+    Navigator.pop(context);
   }
 }
 
