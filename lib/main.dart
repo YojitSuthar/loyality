@@ -1,19 +1,7 @@
-import 'package:assign_1/screens/Forget_password/forget_password.dart';
-import 'package:assign_1/screens/home_page/home_screen.dart';
-import 'package:assign_1/screens/login_page/loginPage.dart';
-import 'package:assign_1/screens/loyality_card/loyallity_card.dart';
-import 'package:assign_1/screens/loyality_card/user_data_textfield.dart';
-import 'package:assign_1/screens/signup_page/signUp_page.dart';
-import 'package:assign_1/screens/splash_screen/splash_screen.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'screens/package_resources/package_resoureces.dart';
 
-
-final navigatorkey= GlobalKey<NavigatorState>();
-class myApp extends StatelessWidget {
-
-
+class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -24,20 +12,10 @@ class myApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context , child) {
         return MaterialApp(
-          navigatorKey: navigatorkey,
+          navigatorKey: NavigationService.navigatorKey,
           debugShowCheckedModeBanner: false,
-          initialRoute: "splash",
-          routes: {
-            "splash":(context) => SplashScreen(),
-            LoginPage.id:(context)=> LoginPage(),
-            "Signup":(context)=> SignUp(),
-            HomePage.id:(context) =>HomePage(),
-            "forgetPass":(context) =>ForgetPass(),
-            "loyal_card":(context) =>LoyalCard(),
-            "userDataField":(context)=>UserDataField(label: "New Card",value: "Save"),
-          "EdituserDataField":(context)=>UserDataField(label: "Edit Card",value: "Update"),
-
-          },
+          initialRoute: SplashScreen.id,
+          routes: routes,
         );
       },
     );
@@ -47,7 +25,7 @@ class myApp extends StatelessWidget {
 Future main()async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(myApp());
+  runApp(MyApp());
 }
 
 

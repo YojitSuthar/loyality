@@ -1,7 +1,4 @@
-
-
-
-class Loyalcard {
+class LoyalCard {
   String? id;
   String? frontCardImg;
   String? backCardImg;
@@ -11,7 +8,7 @@ class Loyalcard {
   String? notes;
   String? vendorList;
 
-  Loyalcard(  {
+  LoyalCard(  {
     this.id='',
      this.frontCardImg,
      this.backCardImg,
@@ -22,7 +19,7 @@ class Loyalcard {
      this.vendorList
   });
 
-  Loyalcard.fromJson(Map<String, dynamic> json) {
+  LoyalCard.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     frontCardImg = json['frontCardImg'];
     backCardImg = json['backCardImg'];

@@ -1,13 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:assign_1/resources/resources.dart';
-import '../home_page/home_screen.dart';
-import '../login_page/loginPage.dart';
+import 'package:assign_1/screens/package_resources/package_resoureces.dart';
 
 class SplashScreen extends StatefulWidget {
+  static const String id="SplashScreen";
   const SplashScreen({super.key});
-
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
@@ -27,17 +23,9 @@ class _SplashScreenState extends State<SplashScreen> {
     Duration time = const Duration(seconds: 3);
     await Future.delayed(time, () {});
     if (user != null) {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (BuildContext context) {
-          return const HomePage();
-        },
-      ));
+      Navigator.of(context).pushReplacementNamed(HomePage.id);
     } else {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (BuildContext context) {
-          return const LoginPage();
-        },
-      ));
+      Navigator.of(context).pushReplacementNamed(LoginPage.id);
     }
   }
 
@@ -60,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Text(
             "Zignuts Technolab",
             style:
-                getTextStyle(33.sp, "Orbitron", GradientColorManager.g3Color),
+                fontSizeFamilyColorTextStyle(33.sp, "Orbitron", GradientColorManager.g3Color),
           )),
         ),
       ),

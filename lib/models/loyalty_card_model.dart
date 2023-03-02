@@ -69,5 +69,4 @@ class LoyaltyCardModel {
     return data;
   }
 
-
 }

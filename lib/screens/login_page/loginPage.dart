@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:assign_1/screens/reuseWidget/reuse_widget.dart';
+import 'package:assign_1/screens/package_resources/package_resoureces.dart';
 
 class LoginPage extends StatefulWidget {
-  static String id="login_page";
+  static const String id="login_page";
 
   const LoginPage({super.key});
   @override
@@ -11,7 +10,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
 
@@ -26,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
               height: 10.h,
             ),
             Form(
-                key: _formKey,
+                key: FormService.formKey,
                 child: Column(
                   children: [
                     UserTextField(
@@ -35,8 +33,7 @@ class _LoginPageState extends State<LoginPage> {
                         label: "Password", icon: Icons.lock, disabled: true,tController: passController),
                     Buttons(
                       label: "Sign-In",
-                      navigation: "home-page",
-                      formKey: _formKey,
+                      formKey: FormService.formKey,
                       eController: emailController,
                       pController: passController,
                     ),
@@ -45,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
             Buttons(
               label: "Sign-up",
               navigation: "Signup",
-              formKey: _formKey,
+              formKey: FormService.formKey,
             ),
             SizedBox(
               height: 5.h,

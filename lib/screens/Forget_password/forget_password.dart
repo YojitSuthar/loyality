@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../reuseWidget/reuse_widget.dart';
+import 'package:assign_1/screens/package_resources/package_resoureces.dart';
 
 class ForgetPass extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
+  static const String id="ForgetPassword";
   TextEditingController forgetPass = TextEditingController();
-
   ForgetPass({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +19,7 @@ class ForgetPass extends StatelessWidget {
             height: 10.h,
           ),
           Form(
-            key: _formKey,
+            key: FormService.formKey,
             child: Column(
               children: [
                 UserTextField(
@@ -33,7 +30,7 @@ class ForgetPass extends StatelessWidget {
                 Buttons(
                   label: "Reset-password",
                   navigation: "null",
-                  formKey: _formKey,
+                  formKey: FormService.formKey,
                   eController: forgetPass,
                 )
               ],

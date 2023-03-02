@@ -1,17 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:assign_1/screens/reuseWidget/reuse_widget.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:assign_1/screens/package_resources/package_resoureces.dart';
 
 class SignUp extends StatelessWidget {
+  static const id = "Sign-up";
 
-  final _formKey = GlobalKey<FormState>();
+  static TextEditingController nameController = TextEditingController();
+  static TextEditingController usernameController = TextEditingController();
+  static TextEditingController emailController = TextEditingController();
+  static TextEditingController passController = TextEditingController();
+  static TextEditingController confirmPassController = TextEditingController();
 
-  TextEditingController nameController = TextEditingController();
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passController = TextEditingController();
-  TextEditingController confirmPassController = TextEditingController();
-
+  final List dataField = [
+    {
+      "label": "Name",
+      "icon": Icons.abc,
+      "disabled": false,
+      "tController": nameController
+    },
+    {
+      "label": "User-Name",
+      "icon": Icons.email,
+      "disabled": false,
+      "tController": usernameController
+    },
+    {
+      "label": "E-mail",
+      "icon": Icons.email,
+      "disabled": false,
+      "tController": emailController
+    },
+    {
+      "label": "Name",
+      "icon": Icons.remove_red_eye_outlined,
+      "disabled": true,
+      "tController": passController
+    },
+    {
+      "label": "Name",
+      "icon": Icons.remove_red_eye_outlined,
+      "disabled": true,
+      "tController": passController
+    },
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +56,7 @@ class SignUp extends StatelessWidget {
               height: 5.h,
             ),
             Form(
-                key: _formKey,
+                key: FormService.formKey,
                 child: Column(
                   children: [
                     UserTextField(label: "Name", icon: Icons.abc, disabled: false,tController: nameController),
@@ -48,8 +78,7 @@ class SignUp extends StatelessWidget {
                 )),
             Buttons(
               label: "Create Account",
-              navigation: "home-page",
-              formKey: _formKey,
+              formKey: FormService.formKey,
               eController: emailController,
               pController: passController,
             ),
