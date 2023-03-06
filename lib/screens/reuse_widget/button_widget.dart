@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:assign_1/screens/package_resources/package_resoureces.dart';
+import 'package:assign_1/screens/package_resources/package_resources.dart';
 
 /*
 Button reuse widget, we use this button for Sign-in ,Sign-out,create account , we specify cases on their label which provide on button name and perform
@@ -12,6 +12,7 @@ class Buttons extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   TextEditingController? eController;
   TextEditingController? pController;
+  TextEditingController? searchController;
 
   Buttons(
       {super.key,
@@ -19,6 +20,7 @@ class Buttons extends StatelessWidget {
        this.navigation,
       required this.formKey,
       this.eController,
+      this.searchController,
       this.pController});
 
   @override
@@ -40,6 +42,9 @@ class Buttons extends StatelessWidget {
 
           else if (label == "Sign-In") {
             FireBase().singIn(eController!, pController!);
+          }
+          else if (label == "Search"){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => CollegeList(textSearchCtrl: searchController!.text,)));
           }
         },
         child: Container(

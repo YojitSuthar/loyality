@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:assign_1/screens/package_resources/package_resoureces.dart';
 
+import 'package:assign_1/screens/college_View/college_search.dart';
+import 'package:flutter/material.dart';
+import 'package:assign_1/screens/package_resources/package_resources.dart';
 
 
 // this are the all the routes which are  available in project
@@ -11,6 +12,8 @@ final Map<String, WidgetBuilder> routes = {
   HomePage.id:(context) =>const HomePage(),
   ForgetPass.id:(context) =>ForgetPass(),
   UserLoyalCard.id:(context) =>const UserLoyalCard(),
+  SearchSection.id:(context) =>  SearchSection(),
+  CollegeList.id:(context) => CollegeList(),
   "userDataField":(context)=>UserDataField(label: "New Card",value: "Save"),
 };
 

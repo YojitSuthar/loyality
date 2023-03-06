@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:assign_1/screens/package_resources/package_resoureces.dart';
+import 'package:assign_1/screens/package_resources/package_resources.dart';
 /*
 Card Template widget, used to get the print of card back side and front side of a card which provides by user
 */

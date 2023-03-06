@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:assign_1/screens/package_resources/package_resoureces.dart';
+import 'package:assign_1/screens/package_resources/package_resources.dart';
 
 /*
 View design widget used  in 3 different screen 1.as splash screen 2.as Login screen 3. as Create account screen, we give

@@ -1,5 +1,6 @@
+import 'package:assign_1/screens/college_View/college_search.dart';
 import 'package:flutter/material.dart';
-import 'package:assign_1/screens/package_resources/package_resoureces.dart';
+import 'package:assign_1/screens/package_resources/package_resources.dart';
 
 class HomePage extends StatefulWidget {
   static String id = "home_page";
@@ -109,6 +110,11 @@ class _HomePageState extends State<HomePage> {
                     },
                   );
                 }),
+          ),
+          ListTile(
+            leading: const Icon(Icons.home_work_outlined),
+            title: const Text("Search College"),
+            onTap: () {Navigator.pushNamed(context, SearchSection.id);   },
           ),
           ListTile(
             leading: const Icon(Icons.logout),

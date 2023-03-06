@@ -29,13 +29,13 @@ class SearchSection extends StatelessWidget {
                     tController: textSearchController),
                 Buttons(
                   label: "Search",
-                  navigation: "null",
                   formKey: FormService.formKey,
-                  eController: textSearchController,
+                  searchController: textSearchController,
                 )
               ],
             ),
           ),
+
         ],
       ),
     );

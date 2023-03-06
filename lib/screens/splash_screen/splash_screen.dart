@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:assign_1/screens/package_resources/package_resoureces.dart';
+import 'package:assign_1/screens/package_resources/package_resources.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String id="SplashScreen";

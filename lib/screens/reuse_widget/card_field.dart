@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:assign_1/screens/package_resources/package_resoureces.dart';
+import 'package:assign_1/screens/package_resources/package_resources.dart';
 
 /*
 Card From Field Widget, we use to get data of the card from user input and its reuse in edit button in pop menu we used this

@@ -20,6 +20,8 @@ dependencies:
   google_sign_in: ^5.4.4
   dotted_border: ^2.0.0+3
   flutter_layout_grid: ^2.0.1
+  url_launcher: ^6.1.10
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:

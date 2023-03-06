@@ -1,7 +1,6 @@
 /*
 * This are the packages we used in whole project
-**/
-
+*/
 export 'package:firebase_auth/firebase_auth.dart';
 export 'package:assign_1/screens/splash_screen/splash_screen.dart';
 export 'package:assign_1/screens/signup_page/signUp_page.dart';
@@ -25,3 +24,6 @@ export 'package:assign_1/screens/reuse_widget/view_design.dart';
 export '../home_page/user_optionList.dart';
 export  '../reuse_widget/card_field.dart';
 export '../reuse_widget/card_template.dart';
+export 'package:assign_1/screens/package_resources/package_resources.dart';
+export 'package:assign_1/screens/college_View/college_list.dart';
+export 'package:assign_1/models/college_data.dart';
